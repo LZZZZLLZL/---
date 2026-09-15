@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 89,
+  "total": 90,
   "chapters": [
     {
       "no": 1,
@@ -539,6 +539,12 @@
       "title": "出考场那一刻",
       "file": "chapters/ch089.md",
       "words": 3057
+    },
+    {
+      "no": 90,
+      "title": "卷子提交之前",
+      "file": "chapters/ch090.md",
+      "words": 3132
     }
   ]
 }
