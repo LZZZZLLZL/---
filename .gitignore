@@ -1,0 +1,12 @@
+# DSH / 工具产物
+.graphflow/
+graphflow-out/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# 系统
+.DS_Store
