@@ -1,0 +1,16 @@
+{
+  "book": "第一名有罪",
+  "generated_from": [
+    "02-总大纲.md",
+    "chapters/"
+  ],
+  "total": 1,
+  "chapters": [
+    {
+      "no": 1,
+      "title": "办公室里的八百块",
+      "file": "chapters/ch001.md",
+      "words": 3088
+    }
+  ]
+}
