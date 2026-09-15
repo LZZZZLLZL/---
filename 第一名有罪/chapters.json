@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 69,
+  "total": 70,
   "chapters": [
     {
       "no": 1,
@@ -419,6 +419,12 @@
       "title": "她在校门口等我",
       "file": "chapters/ch069.md",
       "words": 2835
+    },
+    {
+      "no": 70,
+      "title": "她说的那句话",
+      "file": "chapters/ch070.md",
+      "words": 3121
     }
   ]
 }
