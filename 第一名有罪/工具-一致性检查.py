@@ -17,8 +17,11 @@
              → 视角错位（李洋问就该说「我妈」）
   F 引号配对  每段弯引号必须成对
   G 动作前提  「坐下 / 回到桌边」之类但此前未见起身动作 → 待人工确认（警告）
+  H 日历     章首「X月Y号，周Z」必须与日历锚一致（6 月 24 日 = 周二）
+  I 倒计时   「距离高考还有 N 天 / 高考前 N 天」必须与高考 7 月 7 日一致
 """
 import pathlib
+import datetime
 import re
 import sys
 
@@ -133,6 +136,61 @@ def check_file(path):
         out.append(("error", f"弯引号不配对，段号 {odd[:6]}"))
 
     out.extend(heuristic_actions(path, paras))
+    out.extend(check_calendar(t))
+    return out
+
+
+# ── 日历闸门（南洲历锚：6 月 24 日 = 周二，即与 2025 年同形；高考 = 7 月 7 日） ──
+CAL_ANCHOR = datetime.date(2025, 6, 24)  # 周二
+CN_DIGIT = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5,
+            "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
+CN_WEEK = "一二三四五六日"
+
+
+def _cn_num(s):
+    if s == "十":
+        return 10
+    if "十" in s:
+        a, b = s.split("十")
+        return CN_DIGIT.get(a, 1) * 10 + (CN_DIGIT.get(b, 0) if b else 0)
+    return CN_DIGIT.get(s, 0)
+
+
+def _canon_date(mo, d):
+    """把书内日历（无绝对年份）映射到一个同形的公历年。"""
+    return datetime.date(2025, mo, d)
+
+
+def _weekday_name(dt):
+    return CN_WEEK[dt.weekday()]
+
+
+def check_calendar(t):
+    out = []
+    head = "\n".join(t.split("\n")[:5])
+    m = re.search(r"([一二三四五六七八九十]+)月([一二三四五六七八九十]+)号[，,、]\s*周([一二三四五六日天])", head)
+    if m:
+        mo, d, said = _cn_num(m.group(1)), _cn_num(m.group(2)), m.group(3)
+        want = _weekday_name(_canon_date(mo, d))
+        if said != want and not (said == "天" and want == "日"):
+            out.append(("error",
+                        f"日期星期不符：{mo}月{d}号写的是周{said}，按日历锚（6月24日=周二）应为周{want}"))
+
+    # 高考倒计时：距离 7 月 7 日
+    md = re.search(r"([一二三四五六七八九十]+)月([一二三四五六七八九十]+)号", head)
+    if md:
+        mo, d = _cn_num(md.group(1)), _cn_num(md.group(2))
+        if (mo, d) <= (7, 7):
+            left = (_canon_date(7, 7) - _canon_date(mo, d)).days
+            for pat in (r"距离高考还有([一二三四五六七八九十]+)天",
+                        r"高考还有([一二三四五六七八九十]+)天",
+                        r"高考前([一二三四五六七八九十]+)天"):
+                for mm in re.finditer(pat, t):
+                    got = _cn_num(mm.group(1))
+                    if got != left:
+                        out.append(("error",
+                                    f"倒计时不符：{mo}月{d}号写「{mm.group(0)}」，"
+                                    f"按高考 7 月 7 日应为 {left} 天"))
     return out
 
 
