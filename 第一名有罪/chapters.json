@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 73,
+  "total": 76,
   "chapters": [
     {
       "no": 1,
@@ -443,6 +443,24 @@
       "title": "我们仨的同盟",
       "file": "chapters/ch073.md",
       "words": 3495
+    },
+    {
+      "no": 74,
+      "title": "保险公司老周",
+      "file": "chapters/ch074.md",
+      "words": 3018
+    },
+    {
+      "no": 75,
+      "title": "她母亲的电话",
+      "file": "chapters/ch075.md",
+      "words": 2850
+    },
+    {
+      "no": 76,
+      "title": "高考倒计时一百天",
+      "file": "chapters/ch076.md",
+      "words": 3012
     }
   ]
 }
