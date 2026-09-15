@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 44,
+  "total": 46,
   "chapters": [
     {
       "no": 1,
@@ -269,6 +269,18 @@
       "title": "我自己买了录音笔",
       "file": "chapters/ch044.md",
       "words": 2816
+    },
+    {
+      "no": 45,
+      "title": "我们去了一趟西郊",
+      "file": "chapters/ch045.md",
+      "words": 2849
+    },
+    {
+      "no": 46,
+      "title": "修车铺的老张",
+      "file": "chapters/ch046.md",
+      "words": 2889
     }
   ]
 }
