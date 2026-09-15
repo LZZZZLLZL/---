@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 20,
+  "total": 24,
   "chapters": [
     {
       "no": 1,
@@ -125,6 +125,30 @@
       "title": "期末考那天的监控",
       "file": "chapters/ch020.md",
       "words": 3158
+    },
+    {
+      "no": 21,
+      "title": "铁盒子里的旧手机",
+      "file": "chapters/ch021.md",
+      "words": 3294
+    },
+    {
+      "no": 22,
+      "title": "工牌上的日期",
+      "file": "chapters/ch022.md",
+      "words": 3249
+    },
+    {
+      "no": 23,
+      "title": "母亲不肯说的那三年",
+      "file": "chapters/ch023.md",
+      "words": 3072
+    },
+    {
+      "no": 24,
+      "title": "木匠铺的夜",
+      "file": "chapters/ch024.md",
+      "words": 2906
     }
   ]
 }
