@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 46,
+  "total": 50,
   "chapters": [
     {
       "no": 1,
@@ -281,6 +281,30 @@
       "title": "修车铺的老张",
       "file": "chapters/ch046.md",
       "words": 2889
+    },
+    {
+      "no": 47,
+      "title": "保险公司的那份卷宗",
+      "file": "chapters/ch047.md",
+      "words": 3400
+    },
+    {
+      "no": 48,
+      "title": "她哥的最后一通电话",
+      "file": "chapters/ch048.md",
+      "words": 3330
+    },
+    {
+      "no": 49,
+      "title": "我父亲不是英雄",
+      "file": "chapters/ch049.md",
+      "words": 3027
+    },
+    {
+      "no": 50,
+      "title": "我把这句话瞒下了",
+      "file": "chapters/ch050.md",
+      "words": 2940
     }
   ]
 }
