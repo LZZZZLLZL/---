@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 87,
+  "total": 89,
   "chapters": [
     {
       "no": 1,
@@ -527,6 +527,18 @@
       "title": "考场外两个小时的雨",
       "file": "chapters/ch087.md",
       "words": 2864
+    },
+    {
+      "no": 88,
+      "title": "最后一科",
+      "file": "chapters/ch088.md",
+      "words": 3088
+    },
+    {
+      "no": 89,
+      "title": "出考场那一刻",
+      "file": "chapters/ch089.md",
+      "words": 3057
     }
   ]
 }
