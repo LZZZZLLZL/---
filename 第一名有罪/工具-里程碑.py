@@ -71,9 +71,15 @@ def main():
         print("未达到新里程碑，无需建分支。")
         return 0
 
+    # 关键：先把工作区在 main 上提交干净，否则后面切分支会把未提交的章节带走
+    current = git("rev-parse", "--abbrev-ref", "HEAD")
+    if git("status", "--porcelain"):
+        git("add", "-A")
+        git("commit", "-q", "-m", f"里程碑前自动提交：{n} 章 {total} 字")
+        print(f"已在 {current} 上自动提交工作区（防止章节被分支带走）")
+
     for i in range(have + 1, reached + 1):
         name = f"milestone/5w-{i}"
-        current = git("rev-parse", "--abbrev-ref", "HEAD")
         git("branch", name)
         print(f"已创建分支 {name}（自 {current} 的 HEAD）")
         # 在里程碑分支上留一个标记提交
@@ -92,7 +98,14 @@ def main():
             f"里程碑 {i}：累计 {total} 字（ch{first:03d}—ch{last:03d}）\n\n"
             f"每 5 万字开一次分支的约定，这是第 {i} 个上传点。")
         git("checkout", "-q", current)
-        print(f"已在 {name} 上提交里程碑标记，并切回 {current}")
+        # 自检：切回后 main 上的定稿章节数必须与建分支前一致
+        after_n = len(list(CHDIR.glob("ch*.md")))
+        if after_n < n:
+            raise RuntimeError(
+                f"切回 {current} 后章节数从 {n} 掉到 {after_n}——有文件被分支带走，"
+                f"请执行：git checkout {name} -- chapters/ 然后提交"
+            )
+        print(f"已在 {name} 上提交里程碑标记，并切回 {current}（章节数自检 {after_n}/{n} 通过）")
     return 0
 
 
