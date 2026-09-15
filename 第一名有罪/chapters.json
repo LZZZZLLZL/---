@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 50,
+  "total": 53,
   "chapters": [
     {
       "no": 1,
@@ -305,6 +305,24 @@
       "title": "我把这句话瞒下了",
       "file": "chapters/ch050.md",
       "words": 2940
+    },
+    {
+      "no": 51,
+      "title": "名单第二页打开了",
+      "file": "chapters/ch051.md",
+      "words": 3800
+    },
+    {
+      "no": 52,
+      "title": "林桦老师的抽屉",
+      "file": "chapters/ch052.md",
+      "words": 3644
+    },
+    {
+      "no": 53,
+      "title": "我在教务处值日",
+      "file": "chapters/ch053.md",
+      "words": 3462
     }
   ]
 }
