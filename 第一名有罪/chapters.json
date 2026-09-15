@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 12,
+  "total": 13,
   "chapters": [
     {
       "no": 1,
@@ -40,7 +40,7 @@
       "no": 6,
       "title": "我母亲的透析日",
       "file": "chapters/ch006.md",
-      "words": 2895
+      "words": 2870
     },
     {
       "no": 7,
@@ -77,6 +77,12 @@
       "title": "那张和解书",
       "file": "chapters/ch012.md",
       "words": 3285
+    },
+    {
+      "no": 13,
+      "title": "他母亲的病历本",
+      "file": "chapters/ch013.md",
+      "words": 3094
     }
   ]
 }
