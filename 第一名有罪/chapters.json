@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 80,
+  "total": 83,
   "chapters": [
     {
       "no": 1,
@@ -485,6 +485,24 @@
       "title": "我被停课七天",
       "file": "chapters/ch080.md",
       "words": 2848
+    },
+    {
+      "no": 81,
+      "title": "停课那天她在黑板上写字",
+      "file": "chapters/ch081.md",
+      "words": 3071
+    },
+    {
+      "no": 82,
+      "title": "老吴的录音",
+      "file": "chapters/ch082.md",
+      "words": 2953
+    },
+    {
+      "no": 83,
+      "title": "孟凡的悔",
+      "file": "chapters/ch083.md",
+      "words": 2838
     }
   ]
 }
