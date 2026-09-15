@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 60,
+  "total": 63,
   "chapters": [
     {
       "no": 1,
@@ -365,6 +365,24 @@
       "title": "那个下雨的晚上（二）",
       "file": "chapters/ch060.md",
       "words": 2861
+    },
+    {
+      "no": 61,
+      "title": "林桦被调走",
+      "file": "chapters/ch061.md",
+      "words": 3457
+    },
+    {
+      "no": 62,
+      "title": "我妈住院",
+      "file": "chapters/ch062.md",
+      "words": 3486
+    },
+    {
+      "no": 63,
+      "title": "旧手机开机了",
+      "file": "chapters/ch063.md",
+      "words": 3644
     }
   ]
 }
