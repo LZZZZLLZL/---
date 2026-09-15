@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 116,
+  "total": 117,
   "chapters": [
     {
       "no": 1,
@@ -701,6 +701,12 @@
       "title": "编号最后两位是 47",
       "file": "chapters/ch116.md",
       "words": 3274
+    },
+    {
+      "no": 117,
+      "title": "一只旧键盘",
+      "file": "chapters/ch117.md",
+      "words": 3088
     }
   ]
 }
