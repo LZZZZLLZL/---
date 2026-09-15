@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 65,
+  "total": 68,
   "chapters": [
     {
       "no": 1,
@@ -395,6 +395,24 @@
       "title": "周予晚被停课",
       "file": "chapters/ch065.md",
       "words": 2802
+    },
+    {
+      "no": 66,
+      "title": "我去找韩振国",
+      "file": "chapters/ch066.md",
+      "words": 3790
+    },
+    {
+      "no": 67,
+      "title": "那份协议上写着我的名字",
+      "file": "chapters/ch067.md",
+      "words": 3319
+    },
+    {
+      "no": 68,
+      "title": "我签了",
+      "file": "chapters/ch068.md",
+      "words": 3606
     }
   ]
 }
