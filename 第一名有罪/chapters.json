@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 59,
+  "total": 60,
   "chapters": [
     {
       "no": 1,
@@ -359,6 +359,12 @@
       "title": "那个下雨的晚上（一）",
       "file": "chapters/ch059.md",
       "words": 3134
+    },
+    {
+      "no": 60,
+      "title": "那个下雨的晚上（二）",
+      "file": "chapters/ch060.md",
+      "words": 2861
     }
   ]
 }
