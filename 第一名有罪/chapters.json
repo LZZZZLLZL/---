@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 114,
+  "total": 115,
   "chapters": [
     {
       "no": 1,
@@ -689,6 +689,12 @@
       "title": "十七张一百",
       "file": "chapters/ch114.md",
       "words": 2858
+    },
+    {
+      "no": 115,
+      "title": "借作文本一本",
+      "file": "chapters/ch115.md",
+      "words": 3395
     }
   ]
 }
