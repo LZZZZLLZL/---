@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 18,
+  "total": 19,
   "chapters": [
     {
       "no": 1,
@@ -113,6 +113,12 @@
       "title": "考察团的十二个人",
       "file": "chapters/ch018.md",
       "words": 3067
+    },
+    {
+      "no": 19,
+      "title": "她在医务室哭了",
+      "file": "chapters/ch019.md",
+      "words": 3279
     }
   ]
 }
