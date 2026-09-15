@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 70,
+  "total": 73,
   "chapters": [
     {
       "no": 1,
@@ -425,6 +425,24 @@
       "title": "她说的那句话",
       "file": "chapters/ch070.md",
       "words": 3121
+    },
+    {
+      "no": 71,
+      "title": "我毁了那张协议",
+      "file": "chapters/ch071.md",
+      "words": 2837
+    },
+    {
+      "no": 72,
+      "title": "程野的账本",
+      "file": "chapters/ch072.md",
+      "words": 3420
+    },
+    {
+      "no": 73,
+      "title": "我们仨的同盟",
+      "file": "chapters/ch073.md",
+      "words": 3495
     }
   ]
 }
