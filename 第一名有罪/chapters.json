@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 42,
+  "total": 44,
   "chapters": [
     {
       "no": 1,
@@ -257,6 +257,18 @@
       "title": "母亲和她说了什么",
       "file": "chapters/ch042.md",
       "words": 2809
+    },
+    {
+      "no": 43,
+      "title": "旧账本",
+      "file": "chapters/ch043.md",
+      "words": 2939
+    },
+    {
+      "no": 44,
+      "title": "我自己买了录音笔",
+      "file": "chapters/ch044.md",
+      "words": 2816
     }
   ]
 }
