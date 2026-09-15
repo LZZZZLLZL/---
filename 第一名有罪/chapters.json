@@ -190,8 +190,8 @@
       "no": 3,
       "title": "第一张便利贴",
       "file": "chapters/ch003.md",
-      "words": 2983,
-      "min": 7,
+      "words": 3038,
+      "min": 8,
       "group": "1-10",
       "anchor": ""
     },
@@ -217,7 +217,7 @@
       "no": 6,
       "title": "我母亲的透析日",
       "file": "chapters/ch006.md",
-      "words": 2870,
+      "words": 2940,
       "min": 7,
       "group": "1-10",
       "anchor": ""
@@ -235,7 +235,7 @@
       "no": 8,
       "title": "她在教室后墙画了一辆车",
       "file": "chapters/ch008.md",
-      "words": 3476,
+      "words": 3554,
       "min": 9,
       "group": "1-10",
       "anchor": ""
@@ -271,7 +271,7 @@
       "no": 12,
       "title": "那张和解书",
       "file": "chapters/ch012.md",
-      "words": 3292,
+      "words": 3328,
       "min": 8,
       "group": "11-20",
       "anchor": ""
