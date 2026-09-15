@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 100,
+  "total": 101,
   "chapters": [
     {
       "no": 1,
@@ -605,6 +605,12 @@
       "title": "有罪的人",
       "file": "chapters/ch100.md",
       "words": 3224
+    },
+    {
+      "no": 101,
+      "title": "孟凡来了一趟",
+      "file": "chapters/ch101.md",
+      "words": 3013
     }
   ]
 }
