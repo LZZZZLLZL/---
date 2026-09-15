@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 93,
+  "total": 97,
   "chapters": [
     {
       "no": 1,
@@ -563,6 +563,30 @@
       "title": "保送名单作废",
       "file": "chapters/ch093.md",
       "words": 3434
+    },
+    {
+      "no": 94,
+      "title": "孟凡的自述",
+      "file": "chapters/ch094.md",
+      "words": 3257
+    },
+    {
+      "no": 96,
+      "title": "高考成绩",
+      "file": "chapters/ch096.md",
+      "words": 2954
+    },
+    {
+      "no": 98,
+      "title": "散伙饭",
+      "file": "chapters/ch098.md",
+      "words": 3130
+    },
+    {
+      "no": 99,
+      "title": "银杏树下",
+      "file": "chapters/ch099.md",
+      "words": 2833
     }
   ]
 }
