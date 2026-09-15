@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 39,
+  "total": 40,
   "chapters": [
     {
       "no": 1,
@@ -239,6 +239,12 @@
       "title": "程野的举报信",
       "file": "chapters/ch039.md",
       "words": 3054
+    },
+    {
+      "no": 40,
+      "title": "那天晚上下着雨",
+      "file": "chapters/ch040.md",
+      "words": 2838
     }
   ]
 }
