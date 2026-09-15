@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 30,
+  "total": 33,
   "chapters": [
     {
       "no": 1,
@@ -184,7 +184,25 @@
       "no": 30,
       "title": "高三开学：一张报考表",
       "file": "chapters/ch030.md",
-      "words": 2844
+      "words": 2911
+    },
+    {
+      "no": 31,
+      "title": "五点五十的教室",
+      "file": "chapters/ch031.md",
+      "words": 2875
+    },
+    {
+      "no": 32,
+      "title": "一模：我进了前二十",
+      "file": "chapters/ch032.md",
+      "words": 2954
+    },
+    {
+      "no": 33,
+      "title": "她第一次考第二",
+      "file": "chapters/ch033.md",
+      "words": 2948
     }
   ]
 }
