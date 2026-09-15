@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 25,
+  "total": 29,
   "chapters": [
     {
       "no": 1,
@@ -154,7 +154,31 @@
       "no": 25,
       "title": "两个人都没说出口",
       "file": "chapters/ch025.md",
-      "words": 2872
+      "words": 2853
+    },
+    {
+      "no": 26,
+      "title": "第三名的家长会",
+      "file": "chapters/ch026.md",
+      "words": 3110
+    },
+    {
+      "no": 27,
+      "title": "请客的饭局",
+      "file": "chapters/ch027.md",
+      "words": 3384
+    },
+    {
+      "no": 28,
+      "title": "我看见了那张银行卡",
+      "file": "chapters/ch028.md",
+      "words": 3266
+    },
+    {
+      "no": 29,
+      "title": "她替我挡了一次",
+      "file": "chapters/ch029.md",
+      "words": 2905
     }
   ]
 }
