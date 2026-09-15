@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 5,
+  "total": 8,
   "chapters": [
     {
       "no": 1,
@@ -35,6 +35,24 @@
       "title": "她哥哥的最后一条短信",
       "file": "chapters/ch005.md",
       "words": 3054
+    },
+    {
+      "no": 6,
+      "title": "我母亲的透析日",
+      "file": "chapters/ch006.md",
+      "words": 2895
+    },
+    {
+      "no": 9,
+      "title": "我第一次撒谎",
+      "file": "chapters/ch009.md",
+      "words": 3349
+    },
+    {
+      "no": 10,
+      "title": "她问我：你想要什么",
+      "file": "chapters/ch010.md",
+      "words": 3051
     }
   ]
 }
