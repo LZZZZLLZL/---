@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 108,
+  "total": 109,
   "chapters": [
     {
       "no": 1,
@@ -653,6 +653,12 @@
       "title": "二等奖",
       "file": "chapters/ch108.md",
       "words": 3070
+    },
+    {
+      "no": 109,
+      "title": "第三次登门",
+      "file": "chapters/ch109.md",
+      "words": 2918
     }
   ]
 }
