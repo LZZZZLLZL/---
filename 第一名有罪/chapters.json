@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 97,
+  "total": 100,
   "chapters": [
     {
       "no": 1,
@@ -571,10 +571,22 @@
       "words": 3257
     },
     {
+      "no": 95,
+      "title": "韩振国的那句话",
+      "file": "chapters/ch095.md",
+      "words": 2845
+    },
+    {
       "no": 96,
       "title": "高考成绩",
       "file": "chapters/ch096.md",
       "words": 2954
+    },
+    {
+      "no": 97,
+      "title": "毕业照",
+      "file": "chapters/ch097.md",
+      "words": 3015
     },
     {
       "no": 98,
@@ -587,6 +599,12 @@
       "title": "银杏树下",
       "file": "chapters/ch099.md",
       "words": 2833
+    },
+    {
+      "no": 100,
+      "title": "有罪的人",
+      "file": "chapters/ch100.md",
+      "words": 3224
     }
   ]
 }
