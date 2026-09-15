@@ -5,726 +5,1248 @@
     "chapters/"
   ],
   "total": 120,
+  "groups": [
+    {
+      "id": "1-10",
+      "name": "第一幕",
+      "title": "任务",
+      "sub": "",
+      "lo": 1,
+      "hi": 10,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "11-20",
+      "name": "第二幕",
+      "title": "协议",
+      "sub": "",
+      "lo": 11,
+      "hi": 20,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "21-30",
+      "name": "第三幕",
+      "title": "裂缝",
+      "sub": "",
+      "lo": 21,
+      "hi": 30,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "31-40",
+      "name": "第四幕",
+      "title": "高三",
+      "sub": "",
+      "lo": 31,
+      "hi": 40,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "41-50",
+      "name": "第五幕",
+      "title": "寒假",
+      "sub": "",
+      "lo": 41,
+      "hi": 50,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "51-60",
+      "name": "第六幕",
+      "title": "名单",
+      "sub": "",
+      "lo": 51,
+      "hi": 60,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "61-70",
+      "name": "第七幕",
+      "title": "代价",
+      "sub": "",
+      "lo": 61,
+      "hi": 70,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "71-80",
+      "name": "第八幕",
+      "title": "反攻",
+      "sub": "",
+      "lo": 71,
+      "hi": 80,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "81-90",
+      "name": "第九幕",
+      "title": "高考",
+      "sub": "",
+      "lo": 81,
+      "hi": 90,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "91-100",
+      "name": "第十幕",
+      "title": "散场",
+      "sub": "",
+      "lo": 91,
+      "hi": 100,
+      "kind": "act",
+      "count": 10
+    },
+    {
+      "id": "外传·家访线",
+      "name": "外传",
+      "title": "家访线",
+      "sub": "锚定骨架的补章，不推进主线",
+      "lo": 101,
+      "hi": 114,
+      "kind": "branch",
+      "count": 4
+    },
+    {
+      "id": "外传·同学线",
+      "name": "外传",
+      "title": "同学线",
+      "sub": "锚定骨架的补章，不推进主线",
+      "lo": 102,
+      "hi": 120,
+      "kind": "branch",
+      "count": 5
+    },
+    {
+      "id": "外传·竞赛线",
+      "name": "外传",
+      "title": "竞赛线",
+      "sub": "锚定骨架的补章，不推进主线",
+      "lo": 105,
+      "hi": 117,
+      "kind": "branch",
+      "count": 3
+    },
+    {
+      "id": "外传·艺考线",
+      "name": "外传",
+      "title": "艺考线",
+      "sub": "锚定骨架的补章，不推进主线",
+      "lo": 106,
+      "hi": 116,
+      "kind": "branch",
+      "count": 2
+    },
+    {
+      "id": "外传·复读线",
+      "name": "外传",
+      "title": "复读线",
+      "sub": "锚定骨架的补章，不推进主线",
+      "lo": 110,
+      "hi": 119,
+      "kind": "branch",
+      "count": 2
+    },
+    {
+      "id": "外传·大学线",
+      "name": "外传",
+      "title": "大学线",
+      "sub": "锚定骨架的补章，不推进主线",
+      "lo": 111,
+      "hi": 118,
+      "kind": "branch",
+      "count": 4
+    }
+  ],
   "chapters": [
     {
       "no": 1,
       "title": "办公室里的八百块",
       "file": "chapters/ch001.md",
-      "words": 3086
+      "words": 3086,
+      "min": 8,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 2,
       "title": "第一名坐在我前面两排",
       "file": "chapters/ch002.md",
-      "words": 3219
+      "words": 3219,
+      "min": 8,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 3,
       "title": "第一张便利贴",
       "file": "chapters/ch003.md",
-      "words": 2983
+      "words": 2983,
+      "min": 7,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 4,
       "title": "她递给我一支笔",
       "file": "chapters/ch004.md",
-      "words": 2839
+      "words": 2839,
+      "min": 7,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 5,
       "title": "她哥哥的最后一条短信",
       "file": "chapters/ch005.md",
-      "words": 3054
+      "words": 3054,
+      "min": 8,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 6,
       "title": "我母亲的透析日",
       "file": "chapters/ch006.md",
-      "words": 2870
+      "words": 2870,
+      "min": 7,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 7,
       "title": "第二名的眼睛里有什么",
       "file": "chapters/ch007.md",
-      "words": 3101
+      "words": 3101,
+      "min": 8,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 8,
       "title": "她在教室后墙画了一辆车",
       "file": "chapters/ch008.md",
-      "words": 3488
+      "words": 3488,
+      "min": 9,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 9,
       "title": "我第一次撒谎",
       "file": "chapters/ch009.md",
-      "words": 3349
+      "words": 3349,
+      "min": 8,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 10,
       "title": "她问我：你想要什么",
       "file": "chapters/ch010.md",
-      "words": 3051
+      "words": 3051,
+      "min": 8,
+      "group": "1-10",
+      "anchor": ""
     },
     {
       "no": 11,
       "title": "交易",
       "file": "chapters/ch011.md",
-      "words": 2851
+      "words": 2851,
+      "min": 7,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 12,
       "title": "那张和解书",
       "file": "chapters/ch012.md",
-      "words": 3285
+      "words": 3285,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 13,
       "title": "他母亲的病历本",
       "file": "chapters/ch013.md",
-      "words": 3094
+      "words": 3094,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 14,
       "title": "周予航的照片",
       "file": "chapters/ch014.md",
-      "words": 3077
+      "words": 3077,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 15,
       "title": "钱是从哪来的",
       "file": "chapters/ch015.md",
-      "words": 3002
+      "words": 3002,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 16,
       "title": "程野递给我一份名单",
       "file": "chapters/ch016.md",
-      "words": 2972
+      "words": 2972,
+      "min": 7,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 17,
       "title": "我把名单给了孟凡",
       "file": "chapters/ch017.md",
-      "words": 3051
+      "words": 3051,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 18,
       "title": "考察团的十二个人",
       "file": "chapters/ch018.md",
-      "words": 3067
+      "words": 3067,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 19,
       "title": "她在医务室哭了",
       "file": "chapters/ch019.md",
-      "words": 3279
+      "words": 3279,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 20,
       "title": "期末考那天的监控",
       "file": "chapters/ch020.md",
-      "words": 3158
+      "words": 3158,
+      "min": 8,
+      "group": "11-20",
+      "anchor": ""
     },
     {
       "no": 21,
       "title": "铁盒子里的旧手机",
       "file": "chapters/ch021.md",
-      "words": 3294
+      "words": 3294,
+      "min": 8,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 22,
       "title": "工牌上的日期",
       "file": "chapters/ch022.md",
-      "words": 3249
+      "words": 3249,
+      "min": 8,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 23,
       "title": "母亲不肯说的那三年",
       "file": "chapters/ch023.md",
-      "words": 3072
+      "words": 3072,
+      "min": 8,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 24,
       "title": "木匠铺的夜",
       "file": "chapters/ch024.md",
-      "words": 2906
+      "words": 2906,
+      "min": 7,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 25,
       "title": "两个人都没说出口",
       "file": "chapters/ch025.md",
-      "words": 2853
+      "words": 2853,
+      "min": 7,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 26,
       "title": "第三名的家长会",
       "file": "chapters/ch026.md",
-      "words": 3110
+      "words": 3110,
+      "min": 8,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 27,
       "title": "请客的饭局",
       "file": "chapters/ch027.md",
-      "words": 3384
+      "words": 3384,
+      "min": 8,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 28,
       "title": "我看见了那张银行卡",
       "file": "chapters/ch028.md",
-      "words": 3266
+      "words": 3266,
+      "min": 8,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 29,
       "title": "她替我挡了一次",
       "file": "chapters/ch029.md",
-      "words": 2905
+      "words": 2905,
+      "min": 7,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 30,
       "title": "高三开学：一张报考表",
       "file": "chapters/ch030.md",
-      "words": 2911
+      "words": 2911,
+      "min": 7,
+      "group": "21-30",
+      "anchor": ""
     },
     {
       "no": 31,
       "title": "五点五十的教室",
       "file": "chapters/ch031.md",
-      "words": 2875
+      "words": 2875,
+      "min": 7,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 32,
       "title": "一模：我进了前二十",
       "file": "chapters/ch032.md",
-      "words": 2954
+      "words": 2954,
+      "min": 7,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 33,
       "title": "她第一次考第二",
       "file": "chapters/ch033.md",
-      "words": 2948
+      "words": 2948,
+      "min": 7,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 34,
       "title": "孟凡的谈话",
       "file": "chapters/ch034.md",
-      "words": 2813
+      "words": 2813,
+      "min": 7,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 35,
       "title": "我母亲的化验单",
       "file": "chapters/ch035.md",
-      "words": 3044
+      "words": 3044,
+      "min": 8,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 36,
       "title": "我接了他的钱",
       "file": "chapters/ch036.md",
-      "words": 3006
+      "words": 3006,
+      "min": 8,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 37,
       "title": "她发现了",
       "file": "chapters/ch037.md",
-      "words": 2936
+      "words": 2936,
+      "min": 7,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 38,
       "title": "冷战十四天",
       "file": "chapters/ch038.md",
-      "words": 3064
+      "words": 3064,
+      "min": 8,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 39,
       "title": "程野的举报信",
       "file": "chapters/ch039.md",
-      "words": 3054
+      "words": 3054,
+      "min": 8,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 40,
       "title": "那天晚上下着雨",
       "file": "chapters/ch040.md",
-      "words": 2838
+      "words": 2838,
+      "min": 7,
+      "group": "31-40",
+      "anchor": ""
     },
     {
       "no": 41,
       "title": "我给她开的门",
       "file": "chapters/ch041.md",
-      "words": 2827
+      "words": 2827,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 42,
       "title": "母亲和她说了什么",
       "file": "chapters/ch042.md",
-      "words": 2809
+      "words": 2809,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 43,
       "title": "旧账本",
       "file": "chapters/ch043.md",
-      "words": 2939
+      "words": 2939,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 44,
       "title": "我自己买了录音笔",
       "file": "chapters/ch044.md",
-      "words": 2816
+      "words": 2816,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 45,
       "title": "我们去了一趟西郊",
       "file": "chapters/ch045.md",
-      "words": 2849
+      "words": 2849,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 46,
       "title": "修车铺的老张",
       "file": "chapters/ch046.md",
-      "words": 2889
+      "words": 2889,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 47,
       "title": "保险公司的那份卷宗",
       "file": "chapters/ch047.md",
-      "words": 3400
+      "words": 3400,
+      "min": 8,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 48,
       "title": "她哥的最后一通电话",
       "file": "chapters/ch048.md",
-      "words": 3330
+      "words": 3330,
+      "min": 8,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 49,
       "title": "我父亲不是英雄",
       "file": "chapters/ch049.md",
-      "words": 3027
+      "words": 3027,
+      "min": 8,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 50,
       "title": "我把这句话瞒下了",
       "file": "chapters/ch050.md",
-      "words": 2940
+      "words": 2940,
+      "min": 7,
+      "group": "41-50",
+      "anchor": ""
     },
     {
       "no": 51,
       "title": "名单第二页打开了",
       "file": "chapters/ch051.md",
-      "words": 3800
+      "words": 3800,
+      "min": 10,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 52,
       "title": "林桦老师的抽屉",
       "file": "chapters/ch052.md",
-      "words": 3644
+      "words": 3644,
+      "min": 9,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 53,
       "title": "我在教务处值日",
       "file": "chapters/ch053.md",
-      "words": 3462
+      "words": 3462,
+      "min": 9,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 54,
       "title": "程野来找我合作",
       "file": "chapters/ch054.md",
-      "words": 3274
+      "words": 3274,
+      "min": 8,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 55,
       "title": "三方的第一次照面",
       "file": "chapters/ch055.md",
-      "words": 2928
+      "words": 2928,
+      "min": 7,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 56,
       "title": "她不知道我在做的事",
       "file": "chapters/ch056.md",
-      "words": 3795
+      "words": 3795,
+      "min": 9,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 57,
       "title": "我爸的工友老吴",
       "file": "chapters/ch057.md",
-      "words": 3312
+      "words": 3312,
+      "min": 8,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 58,
       "title": "周予航的日记本",
       "file": "chapters/ch058.md",
-      "words": 3106
+      "words": 3106,
+      "min": 8,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 59,
       "title": "那个下雨的晚上（一）",
       "file": "chapters/ch059.md",
-      "words": 3134
+      "words": 3134,
+      "min": 8,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 60,
       "title": "那个下雨的晚上（二）",
       "file": "chapters/ch060.md",
-      "words": 2861
+      "words": 2861,
+      "min": 7,
+      "group": "51-60",
+      "anchor": ""
     },
     {
       "no": 61,
       "title": "林桦被调走",
       "file": "chapters/ch061.md",
-      "words": 3457
+      "words": 3457,
+      "min": 9,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 62,
       "title": "我妈住院",
       "file": "chapters/ch062.md",
-      "words": 3486
+      "words": 3486,
+      "min": 9,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 63,
       "title": "旧手机开机了",
       "file": "chapters/ch063.md",
-      "words": 3644
+      "words": 3644,
+      "min": 9,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 64,
       "title": "我把录音藏了",
       "file": "chapters/ch064.md",
-      "words": 2808
+      "words": 2808,
+      "min": 7,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 65,
       "title": "周予晚被停课",
       "file": "chapters/ch065.md",
-      "words": 2802
+      "words": 2802,
+      "min": 7,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 66,
       "title": "我去找韩振国",
       "file": "chapters/ch066.md",
-      "words": 3790
+      "words": 3790,
+      "min": 9,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 67,
       "title": "那份协议上写着我的名字",
       "file": "chapters/ch067.md",
-      "words": 3319
+      "words": 3319,
+      "min": 8,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 68,
       "title": "我签了",
       "file": "chapters/ch068.md",
-      "words": 3606
+      "words": 3606,
+      "min": 9,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 69,
       "title": "她在校门口等我",
       "file": "chapters/ch069.md",
-      "words": 2835
+      "words": 2835,
+      "min": 7,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 70,
       "title": "她说的那句话",
       "file": "chapters/ch070.md",
-      "words": 3121
+      "words": 3121,
+      "min": 8,
+      "group": "61-70",
+      "anchor": ""
     },
     {
       "no": 71,
       "title": "我毁了那张协议",
       "file": "chapters/ch071.md",
-      "words": 2837
+      "words": 2837,
+      "min": 7,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 72,
       "title": "程野的账本",
       "file": "chapters/ch072.md",
-      "words": 3420
+      "words": 3420,
+      "min": 9,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 73,
       "title": "我们仨的同盟",
       "file": "chapters/ch073.md",
-      "words": 3495
+      "words": 3495,
+      "min": 9,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 74,
       "title": "保险公司老周",
       "file": "chapters/ch074.md",
-      "words": 3018
+      "words": 3018,
+      "min": 8,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 75,
       "title": "她母亲的电话",
       "file": "chapters/ch075.md",
-      "words": 2850
+      "words": 2850,
+      "min": 7,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 76,
       "title": "高考倒计时一百天",
       "file": "chapters/ch076.md",
-      "words": 3012
+      "words": 3012,
+      "min": 8,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 77,
       "title": "我们在天台说的话",
       "file": "chapters/ch077.md",
-      "words": 3323
+      "words": 3323,
+      "min": 8,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 78,
       "title": "一模二模：我进前十",
       "file": "chapters/ch078.md",
-      "words": 3336
+      "words": 3336,
+      "min": 8,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 79,
       "title": "韩振国开始动",
       "file": "chapters/ch079.md",
-      "words": 2904
+      "words": 2904,
+      "min": 7,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 80,
       "title": "我被停课七天",
       "file": "chapters/ch080.md",
-      "words": 2848
+      "words": 2848,
+      "min": 7,
+      "group": "71-80",
+      "anchor": ""
     },
     {
       "no": 81,
       "title": "停课那天她在黑板上写字",
       "file": "chapters/ch081.md",
-      "words": 3071
+      "words": 3071,
+      "min": 8,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 82,
       "title": "老吴的录音",
       "file": "chapters/ch082.md",
-      "words": 2953
+      "words": 2953,
+      "min": 7,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 83,
       "title": "孟凡的悔",
       "file": "chapters/ch083.md",
-      "words": 2835
+      "words": 2835,
+      "min": 7,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 84,
       "title": "她父亲回家",
       "file": "chapters/ch084.md",
-      "words": 3557
+      "words": 3557,
+      "min": 9,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 85,
       "title": "三轮复习的最后一周",
       "file": "chapters/ch085.md",
-      "words": 3455
+      "words": 3455,
+      "min": 9,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 86,
       "title": "高考前夜",
       "file": "chapters/ch086.md",
-      "words": 2813
+      "words": 2813,
+      "min": 7,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 87,
       "title": "考场外两个小时的雨",
       "file": "chapters/ch087.md",
-      "words": 2864
+      "words": 2864,
+      "min": 7,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 88,
       "title": "最后一科",
       "file": "chapters/ch088.md",
-      "words": 3088
+      "words": 3088,
+      "min": 8,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 89,
       "title": "出考场那一刻",
       "file": "chapters/ch089.md",
-      "words": 3057
+      "words": 3057,
+      "min": 8,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 90,
       "title": "卷子提交之前",
       "file": "chapters/ch090.md",
-      "words": 3132
+      "words": 3132,
+      "min": 8,
+      "group": "81-90",
+      "anchor": ""
     },
     {
       "no": 91,
       "title": "调查组进校",
       "file": "chapters/ch091.md",
-      "words": 2858
+      "words": 2858,
+      "min": 7,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 92,
       "title": "十九秒的后半段",
       "file": "chapters/ch092.md",
-      "words": 3052
+      "words": 3052,
+      "min": 8,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 93,
       "title": "保送名单作废",
       "file": "chapters/ch093.md",
-      "words": 3434
+      "words": 3434,
+      "min": 9,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 94,
       "title": "孟凡的自述",
       "file": "chapters/ch094.md",
-      "words": 3257
+      "words": 3257,
+      "min": 8,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 95,
       "title": "韩振国的那句话",
       "file": "chapters/ch095.md",
-      "words": 2845
+      "words": 2845,
+      "min": 7,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 96,
       "title": "高考成绩",
       "file": "chapters/ch096.md",
-      "words": 2954
+      "words": 2954,
+      "min": 7,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 97,
       "title": "毕业照",
       "file": "chapters/ch097.md",
-      "words": 3015
+      "words": 3015,
+      "min": 8,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 98,
       "title": "散伙饭",
       "file": "chapters/ch098.md",
-      "words": 3130
+      "words": 3130,
+      "min": 8,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 99,
       "title": "银杏树下",
       "file": "chapters/ch099.md",
-      "words": 2833
+      "words": 2833,
+      "min": 7,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 100,
       "title": "有罪的人",
       "file": "chapters/ch100.md",
-      "words": 3224
+      "words": 3224,
+      "min": 8,
+      "group": "91-100",
+      "anchor": ""
     },
     {
       "no": 101,
       "title": "孟凡来了一趟",
       "file": "chapters/ch101.md",
-      "words": 3013
+      "words": 3013,
+      "min": 8,
+      "group": "外传·家访线",
+      "anchor": "骨架 ch024—ch025 之间"
     },
     {
       "no": 102,
       "title": "第四十五行",
       "file": "chapters/ch102.md",
-      "words": 3299
+      "words": 3299,
+      "min": 8,
+      "group": "外传·同学线",
+      "anchor": "骨架 ch001—ch010"
     },
     {
       "no": 103,
       "title": "那只缸",
       "file": "chapters/ch103.md",
-      "words": 3109
+      "words": 3109,
+      "min": 8,
+      "group": "外传·家访线",
+      "anchor": "骨架 ch044—ch047 之间"
     },
     {
       "no": 104,
       "title": "两枚硬币",
       "file": "chapters/ch104.md",
-      "words": 2832
+      "words": 2832,
+      "min": 7,
+      "group": "外传·同学线",
+      "anchor": "骨架高二上（ch007 之前）"
     },
     {
       "no": 105,
       "title": "那七分",
       "file": "chapters/ch105.md",
-      "words": 3789
+      "words": 3789,
+      "min": 9,
+      "group": "外传·竞赛线",
+      "anchor": "骨架 ch031—ch040 之间"
     },
     {
       "no": 106,
       "title": "那枚铜铃和一页纸",
       "file": "chapters/ch106.md",
-      "words": 2907
+      "words": 2907,
+      "min": 7,
+      "group": "外传·艺考线",
+      "anchor": "骨架 ch041—ch050"
     },
     {
       "no": 107,
       "title": "两个叠着的圆",
       "file": "chapters/ch107.md",
-      "words": 2854
+      "words": 2854,
+      "min": 7,
+      "group": "外传·同学线",
+      "anchor": "骨架 ch011—ch020"
     },
     {
       "no": 108,
       "title": "二等奖",
       "file": "chapters/ch108.md",
-      "words": 3070
+      "words": 3070,
+      "min": 8,
+      "group": "外传·竞赛线",
+      "anchor": "骨架 ch031—ch040"
     },
     {
       "no": 109,
       "title": "第三次登门",
       "file": "chapters/ch109.md",
-      "words": 2918
+      "words": 2918,
+      "min": 7,
+      "group": "外传·家访线",
+      "anchor": "骨架 ch060—ch065 之间"
     },
     {
       "no": 110,
       "title": "两张纸并着",
       "file": "chapters/ch110.md",
-      "words": 3125
+      "words": 3125,
+      "min": 8,
+      "group": "外传·复读线",
+      "anchor": "骨架 ch091—ch100 之后"
     },
     {
       "no": 111,
       "title": "盒子最底下",
       "file": "chapters/ch111.md",
-      "words": 3117
+      "words": 3117,
+      "min": 8,
+      "group": "外传·大学线",
+      "anchor": "骨架 ch100 之后"
     },
     {
       "no": 112,
       "title": "第一节课",
       "file": "chapters/ch112.md",
-      "words": 2909
+      "words": 2909,
+      "min": 7,
+      "group": "外传·大学线",
+      "anchor": "骨架 ch100 之后"
     },
     {
       "no": 113,
       "title": "顶针",
       "file": "chapters/ch113.md",
-      "words": 2865
+      "words": 2865,
+      "min": 7,
+      "group": "外传·大学线",
+      "anchor": "骨架 ch100 之后"
     },
     {
       "no": 114,
       "title": "十七张一百",
       "file": "chapters/ch114.md",
-      "words": 2858
+      "words": 2858,
+      "min": 7,
+      "group": "外传·家访线",
+      "anchor": "骨架 ch091—ch100 那一段"
     },
     {
       "no": 115,
       "title": "借作文本一本",
       "file": "chapters/ch115.md",
-      "words": 3395
+      "words": 3395,
+      "min": 8,
+      "group": "外传·同学线",
+      "anchor": "骨架 ch100 之后"
     },
     {
       "no": 116,
       "title": "编号最后两位是 47",
       "file": "chapters/ch116.md",
-      "words": 3274
+      "words": 3274,
+      "min": 8,
+      "group": "外传·艺考线",
+      "anchor": "骨架 ch051—ch060"
     },
     {
       "no": 117,
       "title": "一只旧键盘",
       "file": "chapters/ch117.md",
-      "words": 3088
+      "words": 3088,
+      "min": 8,
+      "group": "外传·竞赛线",
+      "anchor": "骨架 ch071—ch080"
     },
     {
       "no": 118,
       "title": "结果那一栏",
       "file": "chapters/ch118.md",
-      "words": 2985
+      "words": 2985,
+      "min": 7,
+      "group": "外传·大学线",
+      "anchor": "骨架 ch100 之后"
     },
     {
       "no": 119,
       "title": "公用电话",
       "file": "chapters/ch119.md",
-      "words": 2894
+      "words": 2894,
+      "min": 7,
+      "group": "外传·复读线",
+      "anchor": "骨架 ch100 之后"
     },
     {
       "no": 120,
       "title": "一卷黑胶布",
       "file": "chapters/ch120.md",
-      "words": 2862
+      "words": 2862,
+      "min": 7,
+      "group": "外传·同学线",
+      "anchor": "骨架 ch100 之后"
     }
   ]
 }
