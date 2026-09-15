@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 76,
+  "total": 80,
   "chapters": [
     {
       "no": 1,
@@ -461,6 +461,30 @@
       "title": "高考倒计时一百天",
       "file": "chapters/ch076.md",
       "words": 3012
+    },
+    {
+      "no": 77,
+      "title": "我们在天台说的话",
+      "file": "chapters/ch077.md",
+      "words": 3323
+    },
+    {
+      "no": 78,
+      "title": "一模二模：我进前十",
+      "file": "chapters/ch078.md",
+      "words": 3336
+    },
+    {
+      "no": 79,
+      "title": "韩振国开始动",
+      "file": "chapters/ch079.md",
+      "words": 2803
+    },
+    {
+      "no": 80,
+      "title": "我被停课七天",
+      "file": "chapters/ch080.md",
+      "words": 2848
     }
   ]
 }
