@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 17,
+  "total": 18,
   "chapters": [
     {
       "no": 1,
@@ -107,6 +107,12 @@
       "title": "我把名单给了孟凡",
       "file": "chapters/ch017.md",
       "words": 3051
+    },
+    {
+      "no": 18,
+      "title": "考察团的十二个人",
+      "file": "chapters/ch018.md",
+      "words": 3067
     }
   ]
 }
