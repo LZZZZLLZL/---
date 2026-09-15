@@ -29,10 +29,12 @@ HAN = re.compile(r"[\u4e00-\u9fff]")
 
 
 def git(*args, check=True):
-    r = subprocess.run(["git", *args], cwd=REPO, capture_output=True, text=True)
+    # 显式指定 utf-8：Windows 上 git 输出按本地代码页解码会乱码
+    r = subprocess.run(["git", *args], cwd=REPO, capture_output=True,
+                       text=True, encoding="utf-8", errors="replace")
     if check and r.returncode != 0:
-        raise RuntimeError(f"git {' '.join(args)} 失败: {r.stderr.strip()}")
-    return r.stdout.strip()
+        raise RuntimeError(f"git {' '.join(args)} 失败: {(r.stderr or '').strip()}")
+    return (r.stdout or "").strip()
 
 
 def progress():
@@ -109,5 +111,15 @@ def main():
     return 0
 
 
+def _force_utf8_console():
+    """Windows 控制台（尤其老版 cmd / GBK 代码页）下保证中文正常输出。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+
 if __name__ == "__main__":
+    _force_utf8_console()
     raise SystemExit(main())

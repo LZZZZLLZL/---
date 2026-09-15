@@ -206,5 +206,15 @@ def main():
     return 0
 
 
+def _force_utf8_console():
+    """Windows 控制台（尤其老版 cmd / GBK 代码页）下保证中文正常输出。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
+
 if __name__ == "__main__":
+    _force_utf8_console()
     raise SystemExit(main())

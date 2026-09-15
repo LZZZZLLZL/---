@@ -28,8 +28,12 @@
     --accent: #8a6a3b;
     --accent-soft: #f0e8dc;
     --shadow: 0 1px 3px rgba(0,0,0,.10);
-    --serif: "Songti SC", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", Georgia, serif;
-    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    /* 字体栈跨平台：macOS(Songti) → 通用思源宋体 → Windows(SimSun/宋体) → 兜底 */
+    --serif: "Songti SC", "Source Han Serif SC", "Noto Serif CJK SC", "Noto Serif SC",
+             "SimSun", "宋体", "STSong", "AR PL UMing CN", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+            "Microsoft YaHei UI", "Microsoft YaHei", "微软雅黑", "Noto Sans CJK SC",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
     --lh: 2.0;
     --fs: 19px;
     --measure: 40em;
@@ -755,7 +759,7 @@
     r.style.setProperty("--pgap", (s.pg / 100).toFixed(2) + "em");
     r.style.setProperty("--serif", s.font === "sans"
       ? 'var(--sans)'
-      : '"Songti SC","Source Han Serif SC","Noto Serif CJK SC","SimSun",Georgia,serif');
+      : '"Songti SC","Source Han Serif SC","Noto Serif CJK SC","Noto Serif SC","SimSun","宋体","STSong",Georgia,"Times New Roman",serif');
     document.body.classList.toggle("just", s.just !== false);
     $("btnWide").classList.toggle("on", !!s.wide);
     [["segTheme", "data-theme", s.theme],
