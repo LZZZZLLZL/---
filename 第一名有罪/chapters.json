@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 115,
+  "total": 116,
   "chapters": [
     {
       "no": 1,
@@ -695,6 +695,12 @@
       "title": "借作文本一本",
       "file": "chapters/ch115.md",
       "words": 3395
+    },
+    {
+      "no": 116,
+      "title": "编号最后两位是 47",
+      "file": "chapters/ch116.md",
+      "words": 3274
     }
   ]
 }
