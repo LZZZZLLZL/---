@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 63,
+  "total": 65,
   "chapters": [
     {
       "no": 1,
@@ -383,6 +383,18 @@
       "title": "旧手机开机了",
       "file": "chapters/ch063.md",
       "words": 3644
+    },
+    {
+      "no": 64,
+      "title": "我把录音藏了",
+      "file": "chapters/ch064.md",
+      "words": 2808
+    },
+    {
+      "no": 65,
+      "title": "周予晚被停课",
+      "file": "chapters/ch065.md",
+      "words": 2802
     }
   ]
 }
