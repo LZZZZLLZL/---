@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 119,
+  "total": 120,
   "chapters": [
     {
       "no": 1,
@@ -719,6 +719,12 @@
       "title": "公用电话",
       "file": "chapters/ch119.md",
       "words": 2894
+    },
+    {
+      "no": 120,
+      "title": "一卷黑胶布",
+      "file": "chapters/ch120.md",
+      "words": 2862
     }
   ]
 }
