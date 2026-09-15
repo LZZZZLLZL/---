@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 90,
+  "total": 93,
   "chapters": [
     {
       "no": 1,
@@ -545,6 +545,24 @@
       "title": "卷子提交之前",
       "file": "chapters/ch090.md",
       "words": 3132
+    },
+    {
+      "no": 91,
+      "title": "调查组进校",
+      "file": "chapters/ch091.md",
+      "words": 2858
+    },
+    {
+      "no": 92,
+      "title": "十九秒的后半段",
+      "file": "chapters/ch092.md",
+      "words": 3052
+    },
+    {
+      "no": 93,
+      "title": "保送名单作废",
+      "file": "chapters/ch093.md",
+      "words": 3434
     }
   ]
 }
