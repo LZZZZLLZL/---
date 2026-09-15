@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 33,
+  "total": 36,
   "chapters": [
     {
       "no": 1,
@@ -203,6 +203,24 @@
       "title": "她第一次考第二",
       "file": "chapters/ch033.md",
       "words": 2948
+    },
+    {
+      "no": 34,
+      "title": "孟凡的谈话",
+      "file": "chapters/ch034.md",
+      "words": 2804
+    },
+    {
+      "no": 35,
+      "title": "我母亲的化验单",
+      "file": "chapters/ch035.md",
+      "words": 3044
+    },
+    {
+      "no": 36,
+      "title": "我接了他的钱",
+      "file": "chapters/ch036.md",
+      "words": 3006
     }
   ]
 }
