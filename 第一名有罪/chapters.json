@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 83,
+  "total": 85,
   "chapters": [
     {
       "no": 1,
@@ -503,6 +503,18 @@
       "title": "孟凡的悔",
       "file": "chapters/ch083.md",
       "words": 2838
+    },
+    {
+      "no": 84,
+      "title": "她父亲回家",
+      "file": "chapters/ch084.md",
+      "words": 3554
+    },
+    {
+      "no": 85,
+      "title": "三轮复习的最后一周",
+      "file": "chapters/ch085.md",
+      "words": 3455
     }
   ]
 }
