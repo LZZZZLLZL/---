@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 19,
+  "total": 20,
   "chapters": [
     {
       "no": 1,
@@ -119,6 +119,12 @@
       "title": "她在医务室哭了",
       "file": "chapters/ch019.md",
       "words": 3279
+    },
+    {
+      "no": 20,
+      "title": "期末考那天的监控",
+      "file": "chapters/ch020.md",
+      "words": 3158
     }
   ]
 }
