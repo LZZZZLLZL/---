@@ -4,13 +4,19 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 1,
+  "total": 2,
   "chapters": [
     {
       "no": 1,
       "title": "办公室里的八百块",
       "file": "chapters/ch001.md",
       "words": 3088
+    },
+    {
+      "no": 2,
+      "title": "第一名坐在我前面两排",
+      "file": "chapters/ch002.md",
+      "words": 3102
     }
   ]
 }
