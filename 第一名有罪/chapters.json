@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 8,
+  "total": 12,
   "chapters": [
     {
       "no": 1,
@@ -43,6 +43,18 @@
       "words": 2895
     },
     {
+      "no": 7,
+      "title": "第二名的眼睛里有什么",
+      "file": "chapters/ch007.md",
+      "words": 3101
+    },
+    {
+      "no": 8,
+      "title": "她在教室后墙画了一辆车",
+      "file": "chapters/ch008.md",
+      "words": 3488
+    },
+    {
       "no": 9,
       "title": "我第一次撒谎",
       "file": "chapters/ch009.md",
@@ -53,6 +65,18 @@
       "title": "她问我：你想要什么",
       "file": "chapters/ch010.md",
       "words": 3051
+    },
+    {
+      "no": 11,
+      "title": "交易",
+      "file": "chapters/ch011.md",
+      "words": 2851
+    },
+    {
+      "no": 12,
+      "title": "那张和解书",
+      "file": "chapters/ch012.md",
+      "words": 3285
     }
   ]
 }
