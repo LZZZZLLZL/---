@@ -16,6 +16,7 @@
   E 人称    提问句无署名、下一段是对方的回答，而提问里用了「你妈/你爸」
              → 视角错位（李洋问就该说「我妈」）
   F 引号配对  每段弯引号必须成对
+  G 动作前提  「坐下 / 回到桌边」之类但此前未见起身动作 → 待人工确认（警告）
 """
 import pathlib
 import re
@@ -35,6 +36,65 @@ CONTRAST3 = re.compile(r"我(?:不|没)[^。！？\n]{0,20}[。！？][^。！�
 Q_PAT = re.compile(r"^“[^”]{0,24}你(妈|爸|爹|娘)[^”]{0,28}”$")
 A_PAT = re.compile(r"^“[^”]*”[\u4e00-\u9fff]{2,3}(?:说|答|道)")
 THIRD = re.compile(r"[她他]")
+
+
+# ── 动作/前提类启发式（只报「待人工确认」，不做判定）──
+NAMES = ["李洋", "孟凡", "周予晚", "程野", "陈桂芝", "韩振国", "陈涛", "郑昊", "老周", "老吴"]
+
+# 暗示「此前已经站起来了」的动作
+NEEDS_STANDING = re.compile(r"(?:回到|走回|转身走回)?[^。！？\n]{0,10}(?:回到桌边|走回桌边|坐下|坐下来|落座)")
+STAND_MARK = re.compile(r"(站起来|起身|站起|走到|走过去|起了身|站起身)")
+SIT_MARK = re.compile(r"(坐着|坐在|坐回|坐下来|坐下)")
+RESIT = re.compile(r"(坐下|坐下来|坐回|回到桌边)")
+# 指向道具的动词（该道具此前必须出现过）
+PROP_VERB = re.compile(r"(把|拿|取|放回|捡起|抽出|端)(?:起)?([\u4e00-\u9fff]{2,4})")
+
+
+def heuristic_actions(path, paras):
+    """按人物跟踪姿态，抓「已经坐着却又坐回去」这类前后矛盾。
+
+    判据很窄，只为把误报压到 0：
+      - 用「站 / 走 / 起」与「坐」两类动词分别把人物置为 stand / sit，状态跨段保持
+      - **先判断、后更新**：一句里出现「坐下」会先把状态改成 sit，
+        若在同一句尾部判断就会自己把自己判成矛盾，所以顺序不能反
+      - 只在人物**已记为坐着**时，对「坐回去 / 坐回 / 重新坐下 / 坐了下来」报警；
+        「坐下」本身不报（中文里它常表示「入座」，未必是状态反转）
+      - 主语取该动词之前最近出现的专名
+      - 「她坐下的位置」这类描述座位的写法直接跳过
+    """
+    notes = []
+    state = {n: None for n in NAMES}
+    MOVE = re.compile(r"(走回|回到桌边|走到|走过去|站起来|起身|站起|站起身)")
+    SIT = re.compile(r"(坐回|坐在|坐着|坐了下来|坐下)")
+    SITBACK = re.compile(r"(坐回去|坐回|重新坐下|坐了下来)")
+    DESCRIBE = re.compile(r"坐(?:下|回)?的(?:位置|地方|那一侧|那一边|位子)")
+
+    for i, b in enumerate(paras):
+        for sent in re.split(r"(?<=[。！？])", b):
+            if not sent.strip() or DESCRIBE.search(sent):
+                continue
+
+            # ① 先判断（用更新前的状态）
+            m = SITBACK.search(sent)
+            if m:
+                head = sent[:m.start()]
+                pos = [(head.rfind(n), n) for n in NAMES if n in head]
+                if pos:
+                    _, name = max(pos)
+                    if state[name] == "sit":
+                        notes.append(("warn",
+                                      f"第 {i+1} 段「{m.group(0)}」：{name} 此前已经坐着，"
+                                      f"此处又坐回去，疑似矛盾"))
+
+            # ② 再更新状态
+            for name in NAMES:
+                if name not in sent:
+                    continue
+                if MOVE.search(sent):
+                    state[name] = "stand"
+                if SIT.search(sent):
+                    state[name] = "sit"
+    return notes
 
 
 def check_file(path):
@@ -71,6 +131,8 @@ def check_file(path):
     odd = [i + 1 for i, b in enumerate(paras) if b.count("“") != b.count("”")]
     if odd:
         out.append(("error", f"弯引号不配对，段号 {odd[:6]}"))
+
+    out.extend(heuristic_actions(path, paras))
     return out
 
 
