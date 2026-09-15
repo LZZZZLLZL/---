@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 111,
+  "total": 112,
   "chapters": [
     {
       "no": 1,
@@ -671,6 +671,12 @@
       "title": "盒子最底下",
       "file": "chapters/ch111.md",
       "words": 3117
+    },
+    {
+      "no": 112,
+      "title": "第一节课",
+      "file": "chapters/ch112.md",
+      "words": 2909
     }
   ]
 }
