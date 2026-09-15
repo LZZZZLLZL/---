@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>第一名有罪 · 阅读器</title>
+<script>
+  /* 先把主题写进 <html>，避免夜间/米黄模式首屏闪白 */
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem("novel:style") || "null") || {};
+      document.documentElement.setAttribute("data-theme", s.theme || "light");
+      if (s.fs) document.documentElement.style.setProperty("--fs", s.fs + "px");
+      if (s.lh) document.documentElement.style.setProperty("--lh", (s.lh / 100).toFixed(2));
+      if (s.mw) document.documentElement.style.setProperty("--measure", s.mw + "em");
+      if (localStorage.getItem("novel:lean") === "1") document.documentElement.className = "pre-lean";
+    } catch (e) {}
+  })();
+</script>
 <style>
   :root {
     --bg: #f7f5f0;
@@ -20,6 +33,7 @@
     --lh: 2.0;
     --fs: 19px;
     --measure: 40em;
+    --pgap: 1.05em;
   }
   html[data-theme="night"] {
     --bg: #16161a;
@@ -54,47 +68,88 @@
     overflow: hidden;
   }
   button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-  input { font: inherit; color: inherit; }
+  input, select { font: inherit; color: inherit; }
 
   .app { display: flex; height: 100vh; height: 100dvh; }
 
   /* ── 侧栏 ── */
   .side {
-    width: 288px; flex: 0 0 288px;
+    width: 300px; flex: 0 0 300px;
     background: var(--surface);
     border-right: 1px solid var(--line);
     display: flex; flex-direction: column;
     transition: margin-left .22s ease;
   }
-  .side-head { padding: 20px 20px 14px; }
+  body.lean .side { margin-left: -301px; }
+  .side-head { padding: 18px 18px 12px; display: flex; align-items: flex-start; gap: 8px; }
   .book-title { font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: .02em; }
-  .book-sub { margin-top: 6px; font-size: 12px; color: var(--ink-3); letter-spacing: .06em; }
-  .side-tabs { display: flex; gap: 2px; padding: 0 14px 10px; }
+  .book-sub { margin-top: 6px; font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+  .fold { margin-left: auto; margin-top: -4px; flex: 0 0 auto; }
+  /* 侧栏收起后，这个按钮接替 ☰ 的位置，保证随时能展开回来 */
+  #btnUnfold { display: none; }
+  body.lean #btnUnfold { display: grid; }
+  body.lean #btnNav { display: none; }
+  .side-tabs { display: flex; gap: 2px; padding: 0 14px 8px; }
   .side-tabs button {
     flex: 1; padding: 7px 0; font-size: 12.5px; color: var(--ink-3);
     border-bottom: 2px solid transparent;
   }
   .side-tabs button.on { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
-  .side-body { flex: 1; overflow-y: auto; padding: 4px 10px 20px; }
+  .side-body { flex: 1; overflow-y: auto; padding: 4px 10px 24px; }
+
+  /* 目录过滤 */
+  .filter-wrap { padding: 0 10px 6px; position: relative; }
+  .filter {
+    width: 100%; padding: 9px 30px 9px 11px; border: 1px solid var(--line); border-radius: 9px;
+    background: var(--bg); outline: none; font-size: 13.5px;
+  }
+  .filter:focus { border-color: var(--accent); }
+  .filter-x {
+    position: absolute; right: 17px; top: 50%; transform: translateY(-50%);
+    width: 20px; height: 20px; line-height: 1; border-radius: 50%;
+    color: var(--ink-3); font-size: 14px; display: none; place-items: center;
+  }
+  .filter-wrap.has .filter-x { display: grid; }
+  .filter-x:hover { background: var(--accent-soft); color: var(--ink); }
+  .filter-hint { padding: 0 12px 8px; font-size: 11.5px; color: var(--ink-3); }
+
+  /* 分组 */
+  .grp { margin-bottom: 1px; }
+  .grp-head {
+    display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+    padding: 9px 10px 7px; color: var(--ink-2); font-size: 12.5px; border-radius: 7px;
+  }
+  .grp-head:hover { background: var(--accent-soft); color: var(--ink); }
+  .grp-caret { flex: 0 0 10px; font-size: 10px; color: var(--ink-3); transition: transform .18s; }
+  .grp.open .grp-caret { transform: rotate(90deg); }
+  .grp-name { font-weight: 650; flex: 0 0 auto; }
+  .grp-title { color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .grp-meta { margin-left: auto; font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+  .grp-meta .rd { color: var(--accent); }
+  .grp-items { display: none; padding-bottom: 4px; }
+  .grp.open .grp-items { display: block; }
+  .grp.sub .grp-name { color: var(--ink-3); font-weight: 600; }
 
   .toc-item {
     display: flex; gap: 10px; align-items: baseline;
-    padding: 9px 10px; border-radius: 7px; width: 100%; text-align: left;
+    padding: 8px 10px 8px 28px; border-radius: 7px; width: 100%; text-align: left;
     color: var(--ink-2); font-size: 14px; line-height: 1.45;
   }
   .toc-item:hover { background: var(--accent-soft); }
   .toc-item.on { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
   .toc-num { flex: 0 0 2.1em; font-family: var(--serif); font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
   .toc-item.on .toc-num { color: var(--accent); }
-  .toc-w { margin-left: auto; font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-  .toc-dot { color: var(--accent); font-size: 15px; line-height: 1; }
+  .toc-t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .toc-note { margin-left: auto; font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+  .toc-dot { color: var(--accent); font-size: 14px; line-height: 1; }
+  mark.f { background: var(--accent-soft); color: var(--ink); border-radius: 3px; padding: 0 1px; }
 
   /* ── 主体 ── */
   .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 
   .bar {
     display: flex; align-items: center; gap: 4px;
-    padding: 10px 16px; border-bottom: 1px solid var(--line);
+    padding: 9px 14px; border-bottom: 1px solid var(--line);
     background: color-mix(in srgb, var(--surface) 88%, transparent);
     backdrop-filter: saturate(1.4) blur(8px);
     flex: 0 0 auto; z-index: 5;
@@ -115,18 +170,41 @@
   }
   .chip:hover { border-color: var(--accent); color: var(--ink); }
   .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .bar-title { font-family: var(--serif); font-size: 14px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40vw; }
+  .bar-title { font-family: var(--serif); font-size: 14px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
 
-  .stage { flex: 1; overflow-y: auto; scroll-behavior: smooth; position: relative; }
-  .page { max-width: var(--measure); margin: 0 auto; padding: 56px 28px 140px; }
+  /* 续读提示条 */
+  .resume {
+    display: none; align-items: center; gap: 10px;
+    padding: 8px 16px; font-size: 13px; color: var(--ink-2);
+    background: var(--accent-soft); border-bottom: 1px solid var(--line);
+  }
+  .resume.on { display: flex; }
+  .resume b { color: var(--ink); font-weight: 650; }
+  .resume .sp { flex: 1; }
+  .resume button { font-size: 13px; }
+  .resume .link { color: var(--accent); font-weight: 600; }
+  .resume .x { color: var(--ink-3); }
 
-  .chapter-head { text-align: center; margin-bottom: 44px; }
+  /* 注意：这里不能用 scroll-behavior:smooth —— 换章时残留的平滑滚动动画
+   会把紧接着设置的 scrollTop 回滚掉，导致搜索/书签跳章后定位失效。 */
+  .stage { flex: 1; overflow-y: auto; position: relative; }
+  .page { max-width: var(--measure); margin: 0 auto; padding: 54px 28px 140px; transition: max-width .22s ease; }
+  /* 收起目录时把省下的横向空间还给正文 */
+  body.lean .page { max-width: min(94vw, calc(var(--measure) + 14em)); }
+
+  .chapter-head { text-align: center; margin-bottom: 42px; }
   .chapter-no { font-family: var(--serif); font-size: 13px; letter-spacing: .32em; color: var(--ink-3); }
   .chapter-name { font-family: var(--serif); font-size: 30px; font-weight: 700; margin-top: 12px; letter-spacing: .02em; }
   .orn { width: 40px; height: 1px; background: var(--accent); opacity: .5; margin: 22px auto 0; }
+  .chapter-meta { margin-top: 14px; font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+  .chapter-anchor {
+    margin-top: 10px; display: inline-block; padding: 3px 10px; border-radius: 999px;
+    border: 1px dashed var(--line); font-size: 11.5px; color: var(--ink-3);
+  }
 
   .prose { font-family: var(--serif); font-size: var(--fs); line-height: var(--lh); color: var(--ink); }
-  .prose p { margin: 0 0 1.05em; text-indent: 2em; text-align: justify; }
+  .prose p { margin: 0 0 var(--pgap); text-indent: 2em; }
+  body.just .prose p { text-align: justify; }
 
   .end-mark { text-align: center; color: var(--ink-3); font-family: var(--serif); font-size: 13px; letter-spacing: .3em; margin-top: 56px; }
   .next-wrap { display: flex; justify-content: center; margin-top: 34px; }
@@ -148,19 +226,19 @@
   .sheet.on { display: grid; }
   .panel {
     background: var(--surface); border-radius: 14px; box-shadow: var(--shadow);
-    width: min(520px, 100%); max-height: 82vh; overflow: hidden; display: flex; flex-direction: column;
+    width: min(560px, 100%); max-height: 84vh; overflow: hidden; display: flex; flex-direction: column;
     border: 1px solid var(--line);
   }
-  .panel-head { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+  .panel-head { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
   .panel-head h3 { margin: 0; font-size: 15px; font-weight: 650; }
   .panel-body { padding: 18px 20px 22px; overflow-y: auto; }
   .row { display: flex; align-items: center; gap: 14px; padding: 11px 0; }
   .row + .row { border-top: 1px solid var(--line); }
   .row label { flex: 0 0 76px; font-size: 13.5px; color: var(--ink-2); }
-  .row .grow { flex: 1; display: flex; align-items: center; gap: 8px; }
+  .row .grow { flex: 1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .seg { display: flex; gap: 6px; flex-wrap: wrap; }
-  input[type=range] { flex: 1; accent-color: var(--accent); }
-  .val { font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; min-width: 42px; text-align: right; }
+  input[type=range] { flex: 1; accent-color: var(--accent); min-width: 120px; }
+  .val { font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; min-width: 46px; text-align: right; }
   .search-input {
     width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px;
     background: var(--bg); outline: none; font-size: 14px;
@@ -168,10 +246,13 @@
   .search-input:focus { border-color: var(--accent); }
   .hit { padding: 12px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
   .hit:hover { background: var(--accent-soft); }
-  .hit-t { font-size: 12.5px; color: var(--accent); margin-bottom: 5px; }
+  .hit-t { font-size: 12.5px; color: var(--accent); margin-bottom: 5px; display: flex; gap: 8px; }
+  .hit-t .n { margin-left: auto; color: var(--ink-3); }
   .hit-x { font-family: var(--serif); font-size: 14.5px; line-height: 1.65; color: var(--ink-2); }
   .hit-x mark { background: var(--accent-soft); color: var(--ink); padding: 0 2px; border-radius: 3px; }
   .empty { color: var(--ink-3); font-size: 13.5px; padding: 22px 0; text-align: center; }
+  .bar-mini { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: 10px; }
+  .bar-mini i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .15s; }
 
   .marks { list-style: none; margin: 0; padding: 0; }
   .marks li { display: flex; align-items: center; gap: 10px; padding: 12px 2px; border-bottom: 1px solid var(--line); }
@@ -192,17 +273,18 @@
   .veil { display: none; }
   @media (max-width: 900px) {
     .side {
-      position: fixed; inset: 0 auto 0 0; z-index: 30; margin-left: -300px;
+      position: fixed; inset: 0 auto 0 0; z-index: 30; margin-left: -301px;
       box-shadow: var(--shadow);
     }
     body.nav .side { margin-left: 0; }
+    body.lean .side { margin-left: -301px; }
     body.nav .veil { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.34); z-index: 25; }
-    .page { padding: 36px 20px 120px; }
+    .page { padding: 34px 18px 120px; }
     .chapter-name { font-size: 25px; }
     .bar-title { display: none; }
   }
   @media print {
-    .side, .bar, .next-wrap { display: none; }
+    .side, .bar, .resume, .next-wrap { display: none !important; }
     .stage { overflow: visible; }
     body { overflow: visible; }
   }
@@ -212,12 +294,19 @@
 <div class="app">
   <aside class="side" id="side">
     <div class="side-head">
-      <div class="book-title">第一名有罪</div>
-      <div class="book-sub">校园长篇 · 连载中</div>
+      <div>
+        <div class="book-title">第一名有罪</div>
+        <div class="book-sub" id="bookSub">校园长篇</div>
+      </div>
+      <button class="fold icon-btn" id="btnFold" title="收起目录（[）">«</button>
     </div>
     <div class="side-tabs">
       <button data-tab="toc" class="on">目录</button>
       <button data-tab="marks">书签</button>
+    </div>
+    <div class="filter-wrap" id="filterWrap">
+      <input class="filter" id="filter" placeholder="筛选章名 / 章号 / 支线…" autocomplete="off">
+      <button class="filter-x" id="filterX" title="清空">✕</button>
     </div>
     <div class="side-body" id="sideBody"></div>
   </aside>
@@ -225,16 +314,25 @@
   <main class="main">
     <div class="bar">
       <button class="icon-btn" id="btnNav" title="目录（T）">☰</button>
-      <button class="icon-btn" id="btnPrev" title="上一章（←）">‹</button>
-      <button class="icon-btn" id="btnNext" title="下一章（→）">›</button>
+      <button class="icon-btn" id="btnUnfold" title="展开目录（[）">»</button>
+      <button class="icon-btn" id="btnPrev" title="上一章（← / K）">‹</button>
+      <button class="icon-btn" id="btnNext" title="下一章（→ / J / 空格）">›</button>
       <div class="bar-sep"></div>
       <span class="bar-title" id="barTitle">—</span>
       <div class="sp"></div>
       <button class="chip" id="btnProgress" title="阅读进度">0%</button>
       <div class="bar-sep"></div>
+      <button class="icon-btn" id="btnWide" title="宽屏（W）">⇔</button>
       <button class="icon-btn" id="btnSearch" title="全文搜索（/）">⌕</button>
       <button class="icon-btn" id="btnMark" title="加书签（B）">☆</button>
       <button class="icon-btn" id="btnFont" title="排版设置（S）">Aa</button>
+    </div>
+
+    <div class="resume" id="resume">
+      <span id="resumeText"></span>
+      <div class="sp"></div>
+      <button class="link" id="resumeGo">回到那里</button>
+      <button class="x" id="resumeX" title="关闭">✕</button>
     </div>
 
     <div class="stage" id="stage">
@@ -243,6 +341,8 @@
           <div class="chapter-no" id="chNo"></div>
           <h1 class="chapter-name" id="chName"></h1>
           <div class="orn"></div>
+          <div class="chapter-meta" id="chMeta"></div>
+          <div id="chAnchor"></div>
         </div>
         <div class="prose" id="prose"></div>
         <div class="end-mark" id="endMark">· 本 章 完 ·</div>
@@ -258,25 +358,38 @@
 <!-- 排版设置 -->
 <div class="sheet" id="sheetFont">
   <div class="panel">
-    <div class="panel-head"><h3>排版</h3><div class="sp" style="flex:1"></div><button class="icon-btn" data-close>✕</button></div>
+    <div class="panel-head"><h3>排版</h3><div style="flex:1"></div><button class="icon-btn" data-close>✕</button></div>
     <div class="panel-body">
+      <div class="row"><label>预设</label><div class="grow"><div class="seg" id="segPreset">
+        <button class="chip" data-preset="comfort">舒适</button>
+        <button class="chip" data-preset="compact">紧凑</button>
+        <button class="chip" data-preset="big">大字</button>
+        <button class="chip" data-preset="wide">宽屏</button>
+      </div></div></div>
       <div class="row"><label>主题</label><div class="grow"><div class="seg" id="segTheme">
         <button class="chip" data-theme="light">浅色</button>
         <button class="chip" data-theme="sepia">米黄</button>
         <button class="chip" data-theme="night">夜间</button>
       </div></div></div>
       <div class="row"><label>字号</label><div class="grow">
-        <input type="range" id="rgFs" min="15" max="28" step="1"><span class="val" id="vFs"></span>
+        <input type="range" id="rgFs" min="15" max="30" step="1"><span class="val" id="vFs"></span>
       </div></div>
       <div class="row"><label>行距</label><div class="grow">
         <input type="range" id="rgLh" min="150" max="260" step="5"><span class="val" id="vLh"></span>
       </div></div>
+      <div class="row"><label>段距</label><div class="grow">
+        <input type="range" id="rgPg" min="0" max="200" step="10"><span class="val" id="vPg"></span>
+      </div></div>
       <div class="row"><label>版心</label><div class="grow">
-        <input type="range" id="rgMw" min="28" max="52" step="1"><span class="val" id="vMw"></span>
+        <input type="range" id="rgMw" min="28" max="72" step="1"><span class="val" id="vMw"></span>
       </div></div>
       <div class="row"><label>字体</label><div class="grow"><div class="seg" id="segFont">
         <button class="chip" data-font="serif">宋体</button>
         <button class="chip" data-font="sans">黑体</button>
+      </div></div></div>
+      <div class="row"><label>两端对齐</label><div class="grow"><div class="seg" id="segJust">
+        <button class="chip" data-just="1">开</button>
+        <button class="chip" data-just="0">关</button>
       </div></div></div>
     </div>
   </div>
@@ -285,7 +398,7 @@
 <!-- 搜索 -->
 <div class="sheet" id="sheetSearch">
   <div class="panel">
-    <div class="panel-head"><h3>全文搜索</h3><div style="flex:1"></div><button class="icon-btn" data-close>✕</button></div>
+    <div class="panel-head"><h3>全文搜索</h3><div style="flex:1"></div><span class="val" id="sProgress"></span><button class="icon-btn" data-close>✕</button></div>
     <div class="panel-body">
       <input class="search-input" id="q" placeholder="输入关键词，回车搜索" autocomplete="off">
       <div id="hits" style="margin-top:12px"></div>
@@ -307,30 +420,44 @@
 (function () {
   "use strict";
 
-  var CH = [];                       // [{file,title,no,words}]
+  var CH = [];                       // 章节数组
+  var GROUPS = [];                   // 分部数组
   var cur = 0;                       // 当前章下标
-  var cache = {};                    // file -> 段落数组
+  var cache = {};                    // file -> 原文
+  var openGroups = {};               // gid -> true（手动展开）
+  var tab = "toc";
+  var filterText = "";
+
   var LS = {
     get: function (k, d) { try { var v = localStorage.getItem("novel:" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem("novel:" + k, JSON.stringify(v)); } catch (e) {} }
   };
   var $ = function (id) { return document.getElementById(id); };
 
-  /* ── 工具 ── */
   function toast(msg) {
     var t = $("toast"); t.textContent = msg; t.classList.add("on");
     clearTimeout(t._t); t._t = setTimeout(function () { t.classList.remove("on"); }, 1600);
   }
   var CN = ["零","一","二","三","四","五","六","七","八","九"];
+  /* 1—999 的汉字数字（原来只到 99，扩写章过 100 之后会输出 undefined） */
   function cnNum(n) {
-    if (n <= 10) return n === 10 ? "十" : CN[n];
-    if (n < 20) return "十" + CN[n - 10];
-    var s = CN[Math.floor(n / 10)] + "十";
-    return n % 10 ? s + CN[n % 10] : s;
+    n = Math.floor(Number(n) || 0);
+    if (n <= 0 || n > 999) return String(n);
+    if (n < 10) return CN[n];
+    if (n < 20) return "十" + (n % 10 ? CN[n % 10] : "");
+    if (n < 100) {
+      var s1 = CN[Math.floor(n / 10)] + "十";
+      return n % 10 ? s1 + CN[n % 10] : s1;
+    }
+    var h = Math.floor(n / 100), rest = n % 100;
+    var s2 = CN[h] + "百";
+    if (rest === 0) return s2;
+    if (rest < 10) return s2 + "零" + CN[rest];
+    if (rest < 20) return s2 + "一十" + (rest % 10 ? CN[rest % 10] : "");
+    return s2 + CN[Math.floor(rest / 10)] + "十" + (rest % 10 ? CN[rest % 10] : "");
   }
-  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
 
-  /* ── 极简 Markdown：段落 + 行内 **粗体** / *斜体* ── */
   function inline(s) {
     s = esc(s);
     s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
@@ -341,12 +468,17 @@
     return md.split(/\n{2,}/).map(function (b) { return b.replace(/\s+$/, ""); })
       .filter(function (b) { return b.replace(/\s/g, "").length; });
   }
-  function countWords(md) {
-    var m = md.match(/[\u4e00-\u9fff]/g);
-    return m ? m.length : 0;
+  function countWords(md) { var m = md.match(/[\u4e00-\u9fff]/g); return m ? m.length : 0; }
+  function groupOf(c) {
+    if (!c || !c.group) return null;
+    for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i].id === c.group) return GROUPS[i];
+    return null;
+  }
+  function groupChapters(gid) {
+    return CH.filter(function (c) { return c.group === gid; });
   }
 
-  /* ── 数据加载 ── */
+  /* ── 数据 ── */
   function loadManifest() {
     return fetch("chapters.json", { cache: "no-store" }).then(function (r) {
       if (!r.ok) throw new Error("chapters.json " + r.status);
@@ -355,63 +487,121 @@
   }
   function loadChapter(i) {
     var f = CH[i].file;
-    if (cache[f]) return Promise.resolve(cache[f]);
+    if (cache[f] != null) return Promise.resolve(cache[f]);
     return fetch(f, { cache: "no-store" }).then(function (r) {
       if (!r.ok) throw new Error(f + " " + r.status);
       return r.text();
     }).then(function (t) { cache[f] = t; return t; });
   }
 
-  /* ── 渲染 ── */
+  /* ── 目录：过滤 + 分组折叠 ── */
+  function matches(c, g) {
+    if (!filterText) return true;
+    var q = filterText.toLowerCase();
+    if (String(c.no).indexOf(q) === 0) return true;
+    if (c.title.toLowerCase().indexOf(q) >= 0) return true;
+    if ((c.anchor || "").toLowerCase().indexOf(q) >= 0) return true;
+    if (g && (g.title.toLowerCase().indexOf(q) >= 0 || g.name.toLowerCase().indexOf(q) >= 0)) return true;
+    return false;
+  }
+  function hl(text, q) {
+    if (!q) return esc(text);
+    var i = text.toLowerCase().indexOf(q.toLowerCase());
+    if (i < 0) return esc(text);
+    return esc(text.slice(0, i)) + "<mark class='f'>" + esc(text.slice(i, i + q.length)) + "</mark>" + esc(text.slice(i + q.length));
+  }
+
   function renderToc() {
     var read = LS.get("read", {});
-    var html = CH.map(function (c, i) {
-      var done = read[c.file] && read[c.file].done;
-      return '<button class="toc-item' + (i === cur ? " on" : "") + '" data-i="' + i + '">' +
-        '<span class="toc-num">' + cnNum(c.no) + '</span>' +
-        '<span class="toc-t">' + esc(c.title) + '</span>' +
-        (done ? '<span class="toc-dot" title="已读完">●</span>' : '') +
-        '<span class="toc-w">' + (c.words || "") + '</span>' +
-        '</button>';
-    }).join("");
-    $("sideBody").innerHTML = '<div>' + html + '</div>';
+    var q = filterText;
+    var curG = CH[cur] && CH[cur].group;
+    var html = "", shown = 0;
+    GROUPS.forEach(function (g) {
+      var items = groupChapters(g.id).filter(function (c) { return matches(c, g); });
+      if (!items.length) return;
+      shown += items.length;
+      var open = q ? true : !!(openGroups[g.id] || g.id === curG);
+      var doneN = items.filter(function (c) { return read[c.file] && read[c.file].done; }).length;
+      var mins = items.reduce(function (a, c) { return a + (c.min || 0); }, 0);
+      html += '<div class="grp' + (open ? " open" : "") + (g.kind === "branch" ? " sub" : "") + '">' +
+        '<button class="grp-head" data-toggle="' + esc(g.id) + '">' +
+          '<span class="grp-caret">▶</span>' +
+          '<span class="grp-name">' + esc(g.name) + "</span>" +
+          (g.title ? '<span class="grp-title">' + esc(g.title) + "</span>" : "") +
+          '<span class="grp-meta">' + items.length + " 章 · " + mins + " 分" +
+            (doneN ? ' · <span class="rd">' + doneN + " 读完</span>" : "") + "</span>" +
+        "</button>" +
+        '<div class="grp-items">' +
+        items.map(function (c) {
+          var i = CH.indexOf(c);
+          var rd = read[c.file] || {};
+          var pct = rd.max || 0;
+          return '<button class="toc-item' + (i === cur ? " on" : "") + '" data-i="' + i + '">' +
+            '<span class="toc-num">' + cnNum(c.no) + "</span>" +
+            '<span class="toc-t">' + hl(c.title, q) + "</span>" +
+            (rd.done ? '<span class="toc-dot">●</span>'
+                     : (pct > 2 ? '<span class="toc-note">' + pct + "%</span>"
+                                : '<span class="toc-note">' + (c.min || "") + "′</span>")) +
+            "</button>";
+        }).join("") +
+        "</div></div>";
+    });
+    $("sideBody").innerHTML = html || '<div class="empty">没有匹配的章节</div>';
+    if (q) {
+      $("sideBody").insertAdjacentHTML("afterbegin", '<div class="filter-hint">筛出 ' + shown + " 章</div>");
+    }
+    Array.prototype.forEach.call($("sideBody").querySelectorAll("[data-toggle]"), function (b) {
+      b.addEventListener("click", function () {
+        var gid = b.getAttribute("data-toggle");
+        var box = b.parentNode;
+        var willOpen = !box.classList.contains("open");
+        box.classList.toggle("open", willOpen);
+        if (!q) { if (willOpen) openGroups[gid] = true; else delete openGroups[gid]; }
+      });
+    });
     Array.prototype.forEach.call($("sideBody").querySelectorAll("[data-i]"), function (b) {
       b.addEventListener("click", function () {
+        openGroups = {};
         go(parseInt(b.getAttribute("data-i"), 10));
         document.body.classList.remove("nav");
       });
     });
   }
 
-  function renderMarksPanel() {
+  /* ── 书签 ── */
+  function renderMarksInto(id) {
+    var host = $(id);
     var marks = LS.get("marks", []);
-    if (!marks.length) { $("markBody").innerHTML = '<div class="empty">还没有书签。读到喜欢的地方按 B 加一个。</div>'; return; }
-    $("markBody").innerHTML = '<ul class="marks">' + marks.map(function (m, i) {
+    if (!marks.length) { host.innerHTML = '<div class="empty">还没有书签。读到喜欢的地方按 B 加一个。</div>'; return; }
+    host.innerHTML = '<ul class="marks">' + marks.map(function (m, i) {
       return '<li><button class="m-main" data-go="' + i + '">' +
-        '<div class="m-t">第 ' + cnNum(m.no) + ' 章 · ' + esc(m.title) + '</div>' +
-        '<div class="m-x">' + esc(m.excerpt || "") + '</div></button>' +
+        '<div class="m-t">第 ' + cnNum(m.no) + " 章 · " + esc(m.title) + "</div>" +
+        '<div class="m-x">' + esc(m.excerpt || "") + "</div></button>" +
         '<button class="del" data-del="' + i + '">删除</button></li>';
     }).join("") + "</ul>";
-    Array.prototype.forEach.call($("markBody").querySelectorAll("[data-go]"), function (b) {
+    Array.prototype.forEach.call(host.querySelectorAll("[data-go]"), function (b) {
       b.addEventListener("click", function () {
         var m = LS.get("marks", [])[parseInt(b.getAttribute("data-go"), 10)];
-        closeSheets(); go(m.i, m.scroll);
+        closeSheets(); go(m.i, m.scroll, m.excerpt);
       });
     });
-    Array.prototype.forEach.call($("markBody").querySelectorAll("[data-del]"), function (b) {
+    Array.prototype.forEach.call(host.querySelectorAll("[data-del]"), function (b) {
       b.addEventListener("click", function () {
         var marks = LS.get("marks", []); marks.splice(parseInt(b.getAttribute("data-del"), 10), 1);
-        LS.set("marks", marks); renderMarksPanel(); toast("已删除");
+        LS.set("marks", marks); renderMarksInto(id); toast("已删除");
       });
     });
   }
 
+  /* ── 渲染一章 ── */
   function showChapter(i, scrollTop, excerpt) {
     cur = i;
-    var c = CH[i];
+    var c = CH[i], g = groupOf(c);
     $("chNo").textContent = "第 " + cnNum(c.no) + " 章";
     $("chName").textContent = c.title;
     $("barTitle").textContent = "第 " + cnNum(c.no) + " 章 · " + c.title;
+    $("chMeta").textContent = (c.words || 0).toLocaleString() + " 字 · 约 " + (c.min || 1) + " 分钟";
+    $("chAnchor").innerHTML = c.anchor ? '<span class="chapter-anchor">外传 · 锚定 ' + esc(c.anchor) + "</span>" : "";
     $("btnPrev").disabled = i === 0;
     $("btnNext").disabled = i === CH.length - 1;
     $("btnNextBig").classList.toggle("off", i === CH.length - 1);
@@ -419,18 +609,18 @@
 
     loadChapter(i).then(function (md) {
       var paras = toParas(md);
-      cache[c.file] = md;
       $("prose").innerHTML = paras.map(function (p) { return "<p>" + inline(p.replace(/\n/g, " ")) + "</p>"; }).join("");
       $("endMark").textContent = "· 本 章 完 · 共 " + countWords(md) + " 字 ·";
       $("stage").scrollTop = scrollTop || 0;
-      if (excerpt) {                     // 从书签跳进来：高亮那一段
+      if (excerpt) {
         var hit = Array.prototype.filter.call($("prose").children, function (el) {
           return el.textContent.indexOf(excerpt.slice(0, 12)) === 0;
         })[0];
-        if (hit) { $("stage").scrollTop = hit.offsetTop - 120; }
+        if (hit) $("stage").scrollTop = hit.offsetTop - 120;
       }
       renderToc();
       updateProgress();
+      try { history.replaceState(null, "", "#/ch/" + c.no); } catch (e) {}
     }).catch(function (e) {
       $("prose").innerHTML = '<p style="color:#b4443a">读取失败：' + esc(String(e.message || e)) +
         '</p><p>请确认阅读器通过 HTTP 打开（用「启动阅读器.command」或 <code>python3 -m http.server</code>），而不是双击本地文件。</p>';
@@ -439,13 +629,12 @@
 
   function go(i, scrollTop, excerpt) {
     if (i < 0 || i >= CH.length) return;
-    var key = "pos:" + CH[i].file;
-    var pos = scrollTop != null ? scrollTop : LS.get(key, 0);
+    var pos = scrollTop != null ? scrollTop : LS.get("pos:" + CH[i].file, 0);
     showChapter(i, pos, excerpt);
     LS.set("last", { i: i, t: Date.now() });
   }
 
-  /* ── 进度与位置记忆 ── */
+  /* ── 进度 ── */
   function updateProgress() {
     var st = $("stage");
     var max = st.scrollHeight - st.clientHeight;
@@ -462,33 +651,61 @@
     LS.set("pos:" + k, st.scrollTop);
   }
 
-  /* ── 搜索 ── */
+  /* ── 搜索：分批建索引 ── */
+  var INDEX = null, indexing = null;
+  function buildIndex() {
+    if (INDEX) return Promise.resolve(INDEX);
+    if (indexing) return indexing;
+    var parts = [], done = 0;
+    var step = function () {
+      var upto = Math.min(CH.length, done + 12), jobs = [];
+      for (var i = done; i < upto; i++) jobs.push(loadChapter(i));
+      return Promise.all(jobs).then(function () {
+        for (var i = done; i < upto; i++) {
+          toParas(cache[CH[i].file]).forEach(function (p, pi) {
+            parts.push({ i: i, pi: pi, text: p, low: p.toLowerCase() });
+          });
+        }
+        done = upto;
+        $("sProgress").textContent = "建索引 " + Math.round(done / CH.length * 100) + "%";
+        var bar = $("sBar"); if (bar) bar.style.width = Math.round(done / CH.length * 100) + "%";
+        if (done < CH.length) return new Promise(function (r) { setTimeout(r, 0); }).then(step);
+        INDEX = parts;
+        $("sProgress").textContent = "共 " + CH.length + " 章";
+        return INDEX;
+      });
+    };
+    indexing = step();
+    return indexing;
+  }
+
   function doSearch(q) {
     q = (q || "").trim();
-    if (!q) { $("hits").innerHTML = ""; return; }
-    $("hits").innerHTML = '<div class="empty">搜索中…</div>';
-    Promise.all(CH.map(function (c) { return loadChapter(CH.indexOf(c)); })).then(function (all) {
-      var out = [], low = q.toLowerCase();
-      all.forEach(function (md, i) {
-        var paras = toParas(md);
-        paras.forEach(function (p, pi) {
-          var idx = p.toLowerCase().indexOf(low);
-          if (idx >= 0) {
-            out.push({ i: i, pi: pi, text: p, idx: idx, q: q });
-          }
+    if (!q) { $("hits").innerHTML = ""; $("sProgress").textContent = ""; return; }
+    if (!INDEX) $("hits").innerHTML = '<div class="empty">正在建立索引…</div><div class="bar-mini"><i id="sBar"></i></div>';
+    buildIndex().then(function (idx) {
+      var low = q.toLowerCase();
+      var out = idx.filter(function (h) { return h.low.indexOf(low) >= 0; });
+      if (!out.length) { $("hits").innerHTML = '<div class="empty">没有找到「' + esc(q) + '」</div>'; return; }
+      var byCh = {};
+      out.forEach(function (h) { (byCh[h.i] = byCh[h.i] || []).push(h); });
+      var keys = Object.keys(byCh).map(Number).sort(function (a, b) { return a - b; });
+      var html = '<div style="font-size:12.5px;color:var(--ink-3);padding-bottom:8px">'
+        + "共 " + out.length + " 处，分布在 " + keys.length + " 章</div>";
+      keys.slice(0, 60).forEach(function (i) {
+        html += '<div class="hit-t" style="margin-top:10px">第 ' + cnNum(CH[i].no) + " 章 · " + esc(CH[i].title)
+             + '<span class="n">' + byCh[i].length + " 处</span></div>";
+        byCh[i].slice(0, 4).forEach(function (h) {
+          var at = h.low.indexOf(low);
+          var s = Math.max(0, at - 18), e = Math.min(h.text.length, at + q.length + 26);
+          var pre = (s > 0 ? "…" : "") + h.text.slice(s, at);
+          var mid = h.text.substr(at, q.length);
+          var post = h.text.slice(at + q.length, e) + (e < h.text.length ? "…" : "");
+          html += '<div class="hit" data-i="' + h.i + '" data-pi="' + h.pi + '">' +
+            '<div class="hit-x">' + esc(pre) + "<mark>" + esc(mid) + "</mark>" + esc(post) + "</div></div>";
         });
       });
-      if (!out.length) { $("hits").innerHTML = '<div class="empty">没有找到「' + esc(q) + '」</div>'; return; }
-      $("hits").innerHTML = '<div style="font-size:12.5px;color:var(--ink-3);padding-bottom:8px">共 ' + out.length + ' 处</div>' +
-        out.slice(0, 80).map(function (h, n) {
-          var s = Math.max(0, h.idx - 18), e = Math.min(h.text.length, h.idx + h.q.length + 26);
-          var pre = (s > 0 ? "…" : "") + h.text.slice(s, h.idx);
-          var mid = h.text.substr(h.idx, h.q.length);
-          var post = h.text.slice(h.idx + h.q.length, e) + (e < h.text.length ? "…" : "");
-          return '<div class="hit" data-i="' + h.i + '" data-pi="' + h.pi + '">' +
-            '<div class="hit-t">第 ' + cnNum(CH[h.i].no) + ' 章 · ' + esc(CH[h.i].title) + '</div>' +
-            '<div class="hit-x">' + esc(pre) + "<mark>" + esc(mid) + "</mark>" + esc(post) + "</div></div>";
-        }).join("");
+      $("hits").innerHTML = html;
       Array.prototype.forEach.call($("hits").querySelectorAll(".hit"), function (el) {
         el.addEventListener("click", function () {
           var i = parseInt(el.getAttribute("data-i"), 10), pi = parseInt(el.getAttribute("data-pi"), 10);
@@ -496,7 +713,7 @@
           closeSheets(); go(i, null, excerpt);
           setTimeout(function () {
             var p = $("prose").children[pi];
-            if (p) { $("stage").scrollTop = p.offsetTop - 120; }
+            if (p) $("stage").scrollTop = p.offsetTop - 120;
           }, 60);
         });
       });
@@ -522,28 +739,59 @@
     toast("已加书签");
   }
 
-  /* ── 设置 ── */
+  /* ── 样式 ── */
+  var PRESETS = {
+    comfort: { fs: 19, lh: 200, mw: 40, pg: 105, wide: false },
+    compact: { fs: 17, lh: 175, mw: 44, pg: 70,  wide: false },
+    big:     { fs: 23, lh: 215, mw: 38, pg: 120, wide: false },
+    wide:    { fs: 19, lh: 205, mw: 62, pg: 105, wide: true  }
+  };
   function applyStyle(s) {
     var r = document.documentElement;
     r.setAttribute("data-theme", s.theme);
     r.style.setProperty("--fs", s.fs + "px");
     r.style.setProperty("--lh", (s.lh / 100).toFixed(2));
     r.style.setProperty("--measure", s.mw + "em");
+    r.style.setProperty("--pgap", (s.pg / 100).toFixed(2) + "em");
     r.style.setProperty("--serif", s.font === "sans"
       ? 'var(--sans)'
       : '"Songti SC","Source Han Serif SC","Noto Serif CJK SC","SimSun",Georgia,serif');
-    Array.prototype.forEach.call($("segTheme").children, function (b) {
-      b.classList.toggle("on", b.getAttribute("data-theme") === s.theme);
+    document.body.classList.toggle("just", s.just !== false);
+    $("btnWide").classList.toggle("on", !!s.wide);
+    [["segTheme", "data-theme", s.theme],
+     ["segFont", "data-font", s.font],
+     ["segJust", "data-just", (s.just !== false) ? "1" : "0"]].forEach(function (p) {
+      Array.prototype.forEach.call($(p[0]).children, function (b) {
+        b.classList.toggle("on", b.getAttribute(p[1]) === p[2]);
+      });
     });
-    Array.prototype.forEach.call($("segFont").children, function (b) {
-      b.classList.toggle("on", b.getAttribute("data-font") === s.font);
+    var hit = null;
+    Object.keys(PRESETS).forEach(function (k) {
+      var p = PRESETS[k];
+      if (p.fs === s.fs && p.lh === s.lh && p.mw === s.mw && p.pg === s.pg && !!p.wide === !!s.wide) hit = k;
+    });
+    Array.prototype.forEach.call($("segPreset").children, function (b) {
+      b.classList.toggle("on", b.getAttribute("data-preset") === hit);
     });
     $("rgFs").value = s.fs; $("vFs").textContent = s.fs + "px";
     $("rgLh").value = s.lh; $("vLh").textContent = (s.lh / 100).toFixed(2);
+    $("rgPg").value = s.pg; $("vPg").textContent = (s.pg / 100).toFixed(2) + "em";
     $("rgMw").value = s.mw; $("vMw").textContent = s.mw + "em";
     LS.set("style", s);
   }
-  var style = LS.get("style", { theme: "light", fs: 19, lh: 200, mw: 40, font: "serif" });
+  var style = LS.get("style", { theme: "light", fs: 19, lh: 200, mw: 40, pg: 105, font: "serif", just: true, wide: false });
+  if (style.pg == null) style.pg = 105;
+  var lean = LS.get("lean", false);
+
+  function setLean(v) {
+    lean = v;
+    document.body.classList.toggle("lean", v);
+    document.documentElement.classList.remove("pre-lean");
+    $("btnFold").textContent = v ? "»" : "«";
+    $("btnFold").title = v ? "展开目录（[）" : "收起目录（[）";
+    LS.set("lean", v);
+    toast(v ? "目录已收起 · 正文更宽" : "目录已展开");
+  }
 
   function closeSheets() {
     Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function (s) { s.classList.remove("on"); });
@@ -557,12 +805,25 @@
     $("btnNav").onclick = function () { document.body.classList.toggle("nav"); };
     $("veil").onclick = function () { document.body.classList.remove("nav"); };
     $("btnMark").onclick = addMark;
+    $("btnFold").onclick = function () { setLean(!lean); };
+    $("btnUnfold").onclick = function () { setLean(false); };
+    $("btnWide").onclick = function () {
+      var on = !style.wide, p = PRESETS.wide;
+      style.wide = on;
+      style.fs = p.fs; style.lh = p.lh; style.pg = p.pg;
+      style.mw = on ? p.mw : PRESETS.comfort.mw;
+      applyStyle(style);
+      toast(on ? "宽屏已开" : "宽屏已关");
+    };
     $("btnFont").onclick = function () { closeSheets(); $("sheetFont").classList.add("on"); };
-    $("btnSearch").onclick = function () { closeSheets(); $("sheetSearch").classList.add("on"); $("q").focus(); };
+    $("btnSearch").onclick = function () {
+      closeSheets(); $("sheetSearch").classList.add("on"); $("q").focus(); buildIndex();
+    };
     $("btnProgress").onclick = function () {
       var read = LS.get("read", {});
       var done = CH.filter(function (c) { return read[c.file] && read[c.file].done; }).length;
-      toast("已读完 " + done + " / " + CH.length + " 章");
+      var total = CH.reduce(function (a, c) { return a + (c.min || 0); }, 0);
+      toast("已读完 " + done + " / " + CH.length + " 章 · 全书约 " + Math.round(total / 60) + " 小时");
     };
     Array.prototype.forEach.call(document.querySelectorAll("[data-close]"), function (b) { b.onclick = closeSheets; });
     Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function (s) {
@@ -573,20 +834,46 @@
       b.onclick = function () {
         Array.prototype.forEach.call(document.querySelectorAll(".side-tabs button"), function (x) { x.classList.remove("on"); });
         b.classList.add("on");
-        var t = b.getAttribute("data-tab");
-        if (t === "marks") { $("sideBody").innerHTML = ""; renderMarksPanelInto("sideBody"); }
+        tab = b.getAttribute("data-tab");
+        $("filterWrap").style.display = tab === "toc" ? "" : "none";
+        if (tab === "marks") { $("sideBody").innerHTML = ""; renderMarksInto("sideBody"); }
         else renderToc();
       };
     });
 
+    $("filter").addEventListener("input", function () {
+      filterText = this.value.trim();
+      $("filterWrap").classList.toggle("has", !!this.value);
+      renderToc();
+    });
+    $("filterX").onclick = function () {
+      $("filter").value = ""; filterText = "";
+      $("filterWrap").classList.remove("has");
+      renderToc(); $("filter").focus();
+    };
+
+    $("segPreset").onclick = function (e) {
+      var b = e.target.closest("[data-preset]"); if (!b) return;
+      var p = PRESETS[b.getAttribute("data-preset")];
+      style.fs = p.fs; style.lh = p.lh; style.mw = p.mw; style.pg = p.pg; style.wide = p.wide;
+      applyStyle(style);
+    };
     $("segTheme").onclick = function (e) { var b = e.target.closest("[data-theme]"); if (b) { style.theme = b.getAttribute("data-theme"); applyStyle(style); } };
     $("segFont").onclick = function (e) { var b = e.target.closest("[data-font]"); if (b) { style.font = b.getAttribute("data-font"); applyStyle(style); } };
+    $("segJust").onclick = function (e) { var b = e.target.closest("[data-just]"); if (b) { style.just = b.getAttribute("data-just") === "1"; applyStyle(style); } };
     $("rgFs").oninput = function () { style.fs = +this.value; applyStyle(style); };
     $("rgLh").oninput = function () { style.lh = +this.value; applyStyle(style); };
+    $("rgPg").oninput = function () { style.pg = +this.value; applyStyle(style); };
     $("rgMw").oninput = function () { style.mw = +this.value; applyStyle(style); };
 
     $("q").addEventListener("keydown", function (e) { if (e.key === "Enter") doSearch(this.value); });
-    $("q").addEventListener("input", function () { clearTimeout(this._t); var v = this.value; this._t = setTimeout(function () { doSearch(v); }, 260); });
+    $("q").addEventListener("input", function () {
+      clearTimeout(this._t); var v = this.value;
+      this._t = setTimeout(function () { doSearch(v); }, 280);
+    });
+
+    $("resumeGo").onclick = function () { $("resume").classList.remove("on"); go(startI); };
+    $("resumeX").onclick = function () { $("resume").classList.remove("on"); };
 
     var tick;
     $("stage").addEventListener("scroll", function () {
@@ -595,52 +882,67 @@
 
     document.addEventListener("keydown", function (e) {
       var tag = (e.target.tagName || "").toLowerCase();
-      if (tag === "input" || tag === "textarea") {
-        if (e.key === "Escape") closeSheets();
+      if (tag === "input" || tag === "textarea" || tag === "select") {
+        if (e.key === "Escape") { e.target.blur(); closeSheets(); }
         return;
       }
-      if (e.key === "ArrowRight" || e.key === "j" || e.key === " ") { e.preventDefault(); go(cur + 1); }
-      else if (e.key === "ArrowLeft" || e.key === "k") { e.preventDefault(); go(cur - 1); }
-      else if (e.key === "b" || e.key === "B") { addMark(); }
+      if (e.key === "ArrowRight" || e.key === "j" || e.key === "J" || e.key === " ") { e.preventDefault(); go(cur + 1); }
+      else if (e.key === "ArrowLeft" || e.key === "k" || e.key === "K") { e.preventDefault(); go(cur - 1); }
+      else if (e.key === "b" || e.key === "B") addMark();
       else if (e.key === "s" || e.key === "S") { closeSheets(); $("sheetFont").classList.add("on"); }
-      else if (e.key === "/") { e.preventDefault(); closeSheets(); $("sheetSearch").classList.add("on"); $("q").focus(); }
-      else if (e.key === "t" || e.key === "T") { document.body.classList.toggle("nav"); }
+      else if (e.key === "w" || e.key === "W") $("btnWide").click();
+      else if (e.key === "[") { if (window.innerWidth > 900) setLean(!lean); else document.body.classList.toggle("nav"); }
+      else if (e.key === "/") { e.preventDefault(); closeSheets(); $("sheetSearch").classList.add("on"); $("q").focus(); buildIndex(); }
+      else if (e.key === "t" || e.key === "T") document.body.classList.toggle("nav");
+      else if (e.key === "g") { $("filter").focus(); document.body.classList.remove("nav"); }
+      else if (e.key === "Home") { e.preventDefault(); go(0); }
+      else if (e.key === "End") { e.preventDefault(); go(CH.length - 1); }
       else if (e.key === "Escape") { closeSheets(); document.body.classList.remove("nav"); }
     });
   }
 
-  function renderMarksPanelInto(id) {
-    var host = $(id);
-    var marks = LS.get("marks", []);
-    if (!marks.length) { host.innerHTML = '<div class="empty">还没有书签。读到喜欢的地方按 B 加一个。</div>'; return; }
-    host.innerHTML = '<ul class="marks">' + marks.map(function (m, i) {
-      return '<li><button class="m-main" data-go="' + i + '">' +
-        '<div class="m-t">第 ' + cnNum(m.no) + ' 章 · ' + esc(m.title) + '</div>' +
-        '<div class="m-x">' + esc(m.excerpt || "") + '</div></button>' +
-        '<button class="del" data-del="' + i + '">删除</button></li>';
-    }).join("") + "</ul>";
-    Array.prototype.forEach.call(host.querySelectorAll("[data-go]"), function (b) {
-      b.addEventListener("click", function () {
-        var m = LS.get("marks", [])[parseInt(b.getAttribute("data-go"), 10)];
-        closeSheets(); go(m.i, m.scroll, m.excerpt);
-      });
-    });
-    Array.prototype.forEach.call(host.querySelectorAll("[data-del]"), function (b) {
-      b.addEventListener("click", function () {
-        var marks = LS.get("marks", []); marks.splice(parseInt(b.getAttribute("data-del"), 10), 1);
-        LS.set("marks", marks); renderMarksPanelInto(id); toast("已删除");
-      });
-    });
-  }
-
   /* ── 启动 ── */
+  var startI = 0;
   loadManifest().then(function (list) {
     CH = list.chapters || list;
+    GROUPS = list.groups || [];
+    if (!GROUPS.length) {
+      GROUPS = [{ id: null, name: "全部", title: "", kind: "act" }];
+      CH.forEach(function (c) { c.group = null; });
+    }
+    var totalMin = CH.reduce(function (a, c) { return a + (c.min || 0); }, 0);
+    $("bookSub").textContent = "校园长篇 · " + CH.length + " 章 · 约 "
+      + Math.round(totalMin / 60) + " 小时";
     bind();
     applyStyle(style);
-    var lastKey = LS.get("last", null);
-    var start = lastKey && lastKey.i < CH.length ? lastKey.i : 0;
-    go(start);
+    document.body.classList.toggle("lean", !!lean);
+    $("btnFold").textContent = lean ? "»" : "«";
+
+    var last = LS.get("last", null);
+    var hash = (location.hash || "").match(/#\/ch\/(\d+)/);
+    var target = hash ? parseInt(hash[1], 10) : null;
+    startI = 0;
+    if (target) {
+      for (var i = 0; i < CH.length; i++) if (CH[i].no === target) { startI = i; break; }
+    } else if (last && last.i < CH.length) {
+      startI = last.i;
+    }
+    go(startI);
+
+    if (last && !target && startI === last.i) {
+      var rec = LS.get("read", {})[CH[startI].file] || {};
+      if ((rec.max || 0) > 5) {
+        $("resumeText").innerHTML = "上次读到 <b>第 " + cnNum(CH[startI].no) + " 章 "
+          + esc(CH[startI].title) + "</b>（已读 " + rec.max + "%）";
+        $("resume").classList.add("on");
+        setTimeout(function () { $("resume").classList.remove("on"); }, 9000);
+      }
+    }
+    window.addEventListener("hashchange", function () {
+      var m = (location.hash || "").match(/#\/ch\/(\d+)/);
+      if (!m) return;
+      for (var i = 0; i < CH.length; i++) if (CH[i].no === parseInt(m[1], 10)) { if (i !== cur) go(i); break; }
+    });
   }).catch(function (e) {
     document.getElementById("prose").innerHTML =
       '<p style="color:#b4443a">无法读取 chapters.json：' + esc(String(e.message || e)) + "</p>" +
