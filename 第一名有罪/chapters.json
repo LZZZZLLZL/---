@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 103,
+  "total": 105,
   "chapters": [
     {
       "no": 1,
@@ -623,6 +623,18 @@
       "title": "那只缸",
       "file": "chapters/ch103.md",
       "words": 3109
+    },
+    {
+      "no": 104,
+      "title": "两枚硬币",
+      "file": "chapters/ch104.md",
+      "words": 2832
+    },
+    {
+      "no": 105,
+      "title": "那七分",
+      "file": "chapters/ch105.md",
+      "words": 3789
     }
   ]
 }
