@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 113,
+  "total": 114,
   "chapters": [
     {
       "no": 1,
@@ -683,6 +683,12 @@
       "title": "顶针",
       "file": "chapters/ch113.md",
       "words": 2865
+    },
+    {
+      "no": 114,
+      "title": "十七张一百",
+      "file": "chapters/ch114.md",
+      "words": 2858
     }
   ]
 }
