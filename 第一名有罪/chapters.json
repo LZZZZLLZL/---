@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 36,
+  "total": 39,
   "chapters": [
     {
       "no": 1,
@@ -208,7 +208,7 @@
       "no": 34,
       "title": "孟凡的谈话",
       "file": "chapters/ch034.md",
-      "words": 2804
+      "words": 2813
     },
     {
       "no": 35,
@@ -221,6 +221,24 @@
       "title": "我接了他的钱",
       "file": "chapters/ch036.md",
       "words": 3006
+    },
+    {
+      "no": 37,
+      "title": "她发现了",
+      "file": "chapters/ch037.md",
+      "words": 2936
+    },
+    {
+      "no": 38,
+      "title": "冷战十四天",
+      "file": "chapters/ch038.md",
+      "words": 3064
+    },
+    {
+      "no": 39,
+      "title": "程野的举报信",
+      "file": "chapters/ch039.md",
+      "words": 3054
     }
   ]
 }
