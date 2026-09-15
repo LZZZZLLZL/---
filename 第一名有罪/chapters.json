@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 40,
+  "total": 42,
   "chapters": [
     {
       "no": 1,
@@ -245,6 +245,18 @@
       "title": "那天晚上下着雨",
       "file": "chapters/ch040.md",
       "words": 2838
+    },
+    {
+      "no": 41,
+      "title": "我给她开的门",
+      "file": "chapters/ch041.md",
+      "words": 2827
+    },
+    {
+      "no": 42,
+      "title": "母亲和她说了什么",
+      "file": "chapters/ch042.md",
+      "words": 2809
     }
   ]
 }
