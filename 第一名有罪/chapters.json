@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 68,
+  "total": 69,
   "chapters": [
     {
       "no": 1,
@@ -413,6 +413,12 @@
       "title": "我签了",
       "file": "chapters/ch068.md",
       "words": 3606
+    },
+    {
+      "no": 69,
+      "title": "她在校门口等我",
+      "file": "chapters/ch069.md",
+      "words": 2835
     }
   ]
 }
