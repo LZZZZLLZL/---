@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 53,
+  "total": 56,
   "chapters": [
     {
       "no": 1,
@@ -323,6 +323,24 @@
       "title": "我在教务处值日",
       "file": "chapters/ch053.md",
       "words": 3462
+    },
+    {
+      "no": 54,
+      "title": "程野来找我合作",
+      "file": "chapters/ch054.md",
+      "words": 3274
+    },
+    {
+      "no": 55,
+      "title": "三方的第一次照面",
+      "file": "chapters/ch055.md",
+      "words": 2928
+    },
+    {
+      "no": 56,
+      "title": "她不知道我在做的事",
+      "file": "chapters/ch056.md",
+      "words": 3795
     }
   ]
 }
