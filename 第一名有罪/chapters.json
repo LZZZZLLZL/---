@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 2,
+  "total": 3,
   "chapters": [
     {
       "no": 1,
@@ -17,6 +17,12 @@
       "title": "第一名坐在我前面两排",
       "file": "chapters/ch002.md",
       "words": 3219
+    },
+    {
+      "no": 3,
+      "title": "第一张便利贴",
+      "file": "chapters/ch003.md",
+      "words": 2983
     }
   ]
 }
