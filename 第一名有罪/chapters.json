@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 24,
+  "total": 25,
   "chapters": [
     {
       "no": 1,
@@ -149,6 +149,12 @@
       "title": "木匠铺的夜",
       "file": "chapters/ch024.md",
       "words": 2906
+    },
+    {
+      "no": 25,
+      "title": "两个人都没说出口",
+      "file": "chapters/ch025.md",
+      "words": 2872
     }
   ]
 }
