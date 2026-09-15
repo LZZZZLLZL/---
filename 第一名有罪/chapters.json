@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 29,
+  "total": 30,
   "chapters": [
     {
       "no": 1,
@@ -179,6 +179,12 @@
       "title": "她替我挡了一次",
       "file": "chapters/ch029.md",
       "words": 2905
+    },
+    {
+      "no": 30,
+      "title": "高三开学：一张报考表",
+      "file": "chapters/ch030.md",
+      "words": 2844
     }
   ]
 }
