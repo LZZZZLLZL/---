@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 106,
+  "total": 108,
   "chapters": [
     {
       "no": 1,
@@ -641,6 +641,18 @@
       "title": "那枚铜铃和一页纸",
       "file": "chapters/ch106.md",
       "words": 2907
+    },
+    {
+      "no": 107,
+      "title": "两个叠着的圆",
+      "file": "chapters/ch107.md",
+      "words": 2854
+    },
+    {
+      "no": 108,
+      "title": "二等奖",
+      "file": "chapters/ch108.md",
+      "words": 3070
     }
   ]
 }
