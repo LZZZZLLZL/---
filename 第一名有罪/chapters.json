@@ -4,7 +4,7 @@
     "02-总大纲.md",
     "chapters/"
   ],
-  "total": 85,
+  "total": 87,
   "chapters": [
     {
       "no": 1,
@@ -515,6 +515,18 @@
       "title": "三轮复习的最后一周",
       "file": "chapters/ch085.md",
       "words": 3455
+    },
+    {
+      "no": 86,
+      "title": "高考前夜",
+      "file": "chapters/ch086.md",
+      "words": 2813
+    },
+    {
+      "no": 87,
+      "title": "考场外两个小时的雨",
+      "file": "chapters/ch087.md",
+      "words": 2864
     }
   ]
 }
